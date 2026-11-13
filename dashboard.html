@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parent Dashboard | Kidoo Master</title>
-    <meta name="description" content="Parent dashboard for Kidoo Master. Enroll children in sessions, track USCF rating and puzzle progress, register for junior tournaments, and manage payments.">
+    <title>Parent Dashboard | Football Coaching Academy</title>
+    <meta name="description"
+        content="Parent Dashboard for Football Coaching Academy. Enroll children, track training attendance, view match schedules, and manage academy updates.">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/dark-mode.css">
     <link rel="stylesheet" href="assets/css/rtl.css">
     <style>
-        /* Dashboard Layout Overrides */
-        body { margin: 0; }
+        body {
+            margin: 0;
+            font-family: var(--font-primary);
+        }
+
         .dashboard-layout {
             display: flex;
             min-height: 100vh;
         }
+
         .dashboard-sidebar {
             top: 0 !important;
             height: 100vh !important;
@@ -27,39 +33,46 @@
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
         }
+
         .dashboard-sidebar::-webkit-scrollbar,
         .dashboard-nav-wrapper::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
             height: 0 !important;
         }
+
         .dashboard-sidebar-brand {
             height: 72px !important;
             min-height: 72px !important;
             box-sizing: border-box !important;
-            padding: 0 32px;
+            padding: 0 28px;
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
         }
+
         .dashboard-sidebar-brand .nav-brand {
             margin: 0;
             padding: 0;
         }
+
         .dashboard-nav-wrapper {
             flex-grow: 1;
             overflow-y: auto;
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
         }
+
         .dashboard-main-area {
             flex: 1;
             margin-left: 280px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            min-width: 0;
         }
+
         .dashboard-navbar {
             position: fixed;
             top: 0;
@@ -70,244 +83,368 @@
             min-height: 72px !important;
             box-sizing: border-box !important;
             background: var(--primary-bg);
-            border-bottom: 1px solid #CBD5E1 !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 0 32px;
         }
+
+        .dashboard-navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
         .dashboard-content {
             margin-left: 0 !important;
-            padding: 0 32px 32px 32px !important;
-            padding-top: 72px !important;
+            padding: 96px 32px 40px 32px !important;
             min-height: 100vh !important;
         }
-        .session-card {
-            box-sizing: border-box !important;
-            width: 100% !important;
-            min-height: 130px !important;
-            height: 100% !important;
-            padding: 20px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-            border-radius: 12px !important;
-        }
-        @media (min-width: 600px) and (max-width: 1024px) {
-            .upcoming-sessions-container {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 16px !important;
-            }
-            .session-card {
-                min-height: 135px !important;
-                height: 100% !important;
-            }
-        }
+
         .dashboard-section h2 {
             margin-top: 0 !important;
             padding-top: 0 !important;
-            line-height: 1.2 !important;
+            line-height: 1.25 !important;
             font-size: 26px !important;
+            font-weight: 700 !important;
         }
+
         .dashboard-section h3 {
-            font-size: 20px !important;
+            font-size: 19px !important;
+            font-weight: 700 !important;
         }
+
         .dashboard-section h4 {
-            font-size: 16px !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
         }
+
         .mobile-only-brand {
             display: none;
         }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-active,
+        .status-confirmed,
+        .status-present {
+            background: rgba(24, 134, 75, 0.14);
+            color: #18864B;
+        }
+
+        .status-pending {
+            background: rgba(23, 89, 199, 0.12);
+            color: #1759C7;
+        }
+
+        .status-absent {
+            background: rgba(220, 38, 38, 0.12);
+            color: #DC2626;
+        }
+
+        .status-completed {
+            background: rgba(102, 112, 133, 0.15);
+            color: var(--text-secondary);
+        }
+
+        /* Demo Banner */
+        .demo-notice-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            background: rgba(23, 89, 199, 0.08);
+            border: 1px solid rgba(23, 89, 199, 0.22);
+            border-radius: 14px;
+            padding: 12px 18px;
+            margin-bottom: 24px;
+            font-size: 13.5px;
+            color: var(--text-primary);
+        }
+
+        /* Attendance Calendar Grid */
+        .att-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .att-cal-header {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            padding: 6px 0;
+        }
+
+        .att-cal-day {
+            aspect-ratio: 1 / 1;
+            min-height: 44px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+        }
+
+        .att-cal-day.empty {
+            background: transparent;
+            border-color: transparent;
+        }
+
+        .att-cal-day.present {
+            background: rgba(24, 134, 75, 0.15);
+            border-color: #18864B;
+            color: #18864B;
+        }
+
+        .att-cal-day.absent {
+            background: rgba(220, 38, 38, 0.12);
+            border-color: #DC2626;
+            color: #DC2626;
+        }
+
+        .att-cal-day.upcoming {
+            background: rgba(199, 240, 0, 0.25);
+            border-color: #A5C900;
+            color: #101D35;
+        }
+
+        .att-cal-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            margin-top: 3px;
+        }
+
+        /* Table Responsiveness */
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .fca-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .fca-table th {
+            padding: 12px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        .fca-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-primary);
+            vertical-align: middle;
+        }
+
+        .fca-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Empty State */
+        .empty-state-box {
+            text-align: center;
+            padding: 40px 20px;
+            border: 1px dashed var(--border-color);
+            border-radius: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* Filter Controls */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-bar .form-control {
+            max-width: 240px;
+            height: 42px;
+            padding: 8px 14px;
+            font-size: 14px;
+        }
+
         @media (max-width: 1024px) and (min-width: 769px) {
-            .dashboard-sidebar { width: 220px !important; }
-            .dashboard-main-area { margin-left: 220px !important; }
+            .dashboard-sidebar {
+                width: 220px !important;
+            }
+
+            .dashboard-main-area {
+                margin-left: 220px !important;
+            }
+
             .dashboard-navbar {
                 left: 220px !important;
                 width: calc(100% - 220px) !important;
+                padding: 0 20px !important;
             }
+
             .dashboard-content {
-                padding: 0 20px 20px 20px !important;
+                padding: 92px 20px 24px 20px !important;
             }
-            [dir="rtl"] .dashboard-main-area { margin-right: 220px !important; margin-left: 0 !important; }
-            [dir="rtl"] .dashboard-navbar { right: 220px !important; left: 0 !important; }
+
             .dashboard-section .grid-4 {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 16px !important;
             }
+
             .dashboard-section .grid-3 {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 16px !important;
             }
-            .dashboard-section .grid-2 {
-                gap: 16px !important;
-            }
+
             .dashboard-nav li a {
                 font-size: 13.5px !important;
                 padding: 12px 20px !important;
             }
         }
+
         @media (max-width: 768px) {
-            .dashboard-main-area { margin-left: 0; }
-            .mobile-only-brand { display: flex !important; }
+            .dashboard-main-area {
+                margin-left: 0;
+            }
+
+            .mobile-only-brand {
+                display: flex !important;
+            }
+
+            .hide-on-mobile {
+                display: none !important;
+            }
+
             .dashboard-navbar {
-                left: 0;
+                left: 0 !important;
+                width: 100% !important;
+                padding: 0 14px !important;
+                justify-content: space-between !important;
+            }
+
+            .dashboard-navbar .nav-actions {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: flex-end !important;
+                width: auto !important;
+                gap: 8px !important;
+                flex-shrink: 0 !important;
+                margin-left: auto !important;
+            }
+
+            .dashboard-navbar #themeToggle,
+            .dashboard-navbar #rtlToggle {
+                display: inline-flex !important;
+                width: 36px !important;
+                height: 36px !important;
+                font-size: 16px !important;
+            }
+
+            .dashboard-navbar .nav-actions .btn {
+                width: auto !important;
+                grid-column: auto !important;
+                height: 36px !important;
+                padding: 0 14px !important;
+                font-size: 12.5px !important;
+                white-space: nowrap !important;
+            }
+
+            .dashboard-content {
+                padding: 88px 16px 24px 16px !important;
+            }
+
+            .filter-bar .form-control {
+                max-width: 100%;
                 width: 100%;
             }
         }
-        @media (max-width: 400px) {
-            .care-team-row {
-                flex-wrap: wrap !important;
-                gap: 12px !important;
+
+        @media (max-width: 480px) {
+            .dashboard-navbar {
+                padding: 0 12px !important;
+                gap: 8px !important;
             }
-            .care-team-info {
-                flex: 1 1 100% !important;
-                width: 100% !important;
+
+            .dashboard-navbar-left {
+                gap: 8px !important;
             }
-            .care-team-row > .btn {
-                align-self: flex-start !important;
-                margin-left: 64px !important;
-                flex-shrink: 0 !important;
+
+            .mobile-only-brand span {
+                font-size: 14.5px !important;
             }
+
+            .mobile-only-brand .nav-brand-img {
+                height: 28px !important;
+            }
+
+            .dashboard-navbar #themeToggle,
+            .dashboard-navbar #rtlToggle {
+                width: 32px !important;
+                height: 32px !important;
+                font-size: 14px !important;
+            }
+
+            .dashboard-navbar .nav-actions {
+                gap: 6px !important;
+            }
+
+            .dashboard-navbar .nav-actions .btn {
+                height: 34px !important;
+                padding: 0 10px !important;
+                font-size: 11.5px !important;
+            }
+
             .dashboard-section .grid-4 {
                 grid-template-columns: 1fr 1fr !important;
                 gap: 12px !important;
             }
-            .dashboard-section .grid-4 .card {
-                padding: 16px !important;
+
+            .dashboard-section .grid-3 {
+                grid-template-columns: 1fr !important;
             }
-            .dashboard-section .grid-4 .card div[style*="font-size: 20px"] {
-                font-size: 16px !important;
-            }
+
             .dashboard-section .grid-2 {
                 grid-template-columns: 1fr !important;
-                gap: 20px !important;
             }
-            .dashboard-content {
-                padding: 0 16px 16px 16px !important;
-            }
-        }
 
-        [dir="rtl"] .dashboard-sidebar {
-            left: auto !important;
-            right: 0 !important;
-            border-right: none !important;
-            border-left: 1px solid var(--border-color) !important;
-        }
-        [dir="rtl"] .dashboard-main-area {
-            margin-left: 0 !important;
-            margin-right: 280px !important;
-        }
-        [dir="rtl"] .dashboard-content {
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-        }
-        [dir="rtl"] .dashboard-navbar {
-            left: 0 !important;
-            right: 280px !important;
-            width: auto !important;
-        }
-        [dir="rtl"] .dashboard-navbar .nav-actions {
-            margin-left: 0 !important;
-            margin-right: auto !important;
-        }
-        [dir="rtl"] .dashboard-sidebar .nav-brand {
-            flex-direction: row-reverse;
-        }
-        [dir="rtl"] .dashboard-nav li a {
-            flex-direction: row-reverse;
-            border-left: none;
-            border-right: 4px solid transparent;
-            padding-left: 32px;
-            padding-right: 32px;
-        }
-        [dir="rtl"] .dashboard-nav li a:hover,
-        [dir="rtl"] .dashboard-nav li a.active {
-            border-right-color: var(--primary-accent);
-            border-left-color: transparent;
-        }
-        @media (max-width: 1024px) {
-            [dir="rtl"] .dashboard-sidebar {
-                transform: translateX(100%) !important;
-                right: 0 !important;
-                left: auto !important;
-            }
-            [dir="rtl"] .dashboard-sidebar.open {
-                transform: translateX(0) !important;
-            }
-            [dir="rtl"] .dashboard-main-area {
-                margin-right: 0 !important;
-            }
-            [dir="rtl"] .dashboard-navbar {
-                right: 0 !important;
-                left: 0 !important;
-            }
-        }
-
-        [dir="rtl"] .care-team-row {
-            flex-direction: row-reverse !important;
-        }
-        [dir="rtl"] .care-team-info {
-            flex-direction: row-reverse !important;
-        }
-        [dir="rtl"] .care-team-info > div {
-            text-align: right;
-        }
-        [dir="rtl"] .care-update-row {
-            flex-direction: row-reverse !important;
-        }
-        [dir="rtl"] .care-update-row > div:last-child {
-            text-align: right;
-        }
-        [dir="rtl"] .grid-4 .card,
-        [dir="rtl"] .grid-2 .card {
-            text-align: right;
-        }
-        [dir="rtl"] .chat-input-bar {
-            flex-direction: row-reverse;
-        }
-        [dir="rtl"] .user-info-divider {
-            border-left: none !important;
-            border-right: 1px solid var(--border-color) !important;
-            padding-left: 0 !important;
-            padding-right: 10px !important;
-        }
-
-        /* Remove unnecessary scroll option from bottom containers on Subscription and Match & Puzzle Logs in 1440px, 1024px and 768px */
-        @media (min-width: 768px) {
-            #logs .card > .table-responsive,
-            #billing .card > .table-responsive {
-                overflow-x: hidden !important;
-                overflow-y: visible !important;
-                scrollbar-width: none !important;
-                -ms-overflow-style: none !important;
-            }
-            #logs .card > .table-responsive::-webkit-scrollbar,
-            #billing .card > .table-responsive::-webkit-scrollbar {
-                display: none !important;
-                height: 0 !important;
-                width: 0 !important;
-            }
-            #logs .table-responsive table,
-            #billing .table-responsive table {
-                width: 100% !important;
-                max-width: 100% !important;
-                table-layout: auto !important;
-            }
-            #logs .table-responsive th,
-            #logs .table-responsive td {
-                padding: 14px 12px !important;
-                font-size: 13.5px !important;
-                white-space: normal !important;
-            }
-            #billing .table-responsive th,
-            #billing .table-responsive td {
-                padding: 14px 16px !important;
-                font-size: 14px !important;
-                white-space: normal !important;
-            }
-            #logs .table-responsive td[style*="max-width: 300px"] {
-                max-width: 250px !important;
+            .att-cal-day {
+                min-height: 36px;
+                font-size: 11.5px;
             }
         }
     </style>
 </head>
+
 <body>
 
     <div class="dashboard-layout">
@@ -315,603 +452,551 @@
         <aside class="dashboard-sidebar">
             <div class="dashboard-sidebar-brand">
                 <a href="index.html" class="nav-brand">
-                    <img src="assets/images/kidoo-logo.svg" alt="Kidoo Master Logo" class="nav-brand-img">
-                    <span>Kidoo<span class="brand-accent">Master</span></span>
+                    <img src="assets/images/fca-logo.svg" alt="Football Coaching Academy Logo" class="nav-brand-img">
+                    <span>Football <span class="brand-accent">Academy</span></span>
                 </a>
             </div>
-            
             <div class="dashboard-nav-wrapper">
                 <ul class="dashboard-nav">
-                    <li><a href="#overview" class="active"><i class="fa-solid fa-chart-simple" style="margin-right: 10px;"></i> Progress Overview</a></li>
-                    <li><a href="#schedule"><i class="fa-solid fa-calendar-days" style="margin-right: 10px;"></i>Tournament Booking</a></li>
-                    <li><a href="#logs"><i class="fa-solid fa-clipboard-list" style="margin-right: 10px;"></i> Match &amp; Puzzle Logs</a></li>
-                    <li><a href="#coaches"><i class="fa-solid fa-chess-knight" style="margin-right: 10px;"></i> Assigned Coaches</a></li>
-                    <li><a href="#messages"><i class="fa-solid fa-comments" style="margin-right: 10px;"></i> Coach Messages</a></li>
-                    <li><a href="#billing"><i class="fa-solid fa-credit-card" style="margin-right: 10px;"></i> Subscriptions</a></li>
-                    <li><a href="#reports"><i class="fa-solid fa-chart-line" style="margin-right: 10px;"></i> USCF Analytics</a></li>
-                    <li><a href="#settings"><i class="fa-solid fa-gear" style="margin-right: 10px;"></i> Settings</a></li>
-                    <li style="margin-top: 32px; border-top: 1px solid var(--border-color); padding-top: 16px;"><a href="index.html" style="color: #e74c3c;"><i class="fa-solid fa-right-from-bracket" style="margin-right: 10px;"></i> Logout</a></li>
+                    <li><a href="#overview" class="active"><i class="fa-solid fa-house"></i> Overview</a></li>
+                    <li><a href="#children"><i class="fa-solid fa-children"></i> My Children</a></li>
+                    <li><a href="#enrollments"><i class="fa-solid fa-clipboard-list"></i> Enrollments</a></li>
+                    <li><a href="#attendance"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+                    <li><a href="#matches"><i class="fa-solid fa-futbol"></i> Match Schedule</a></li>
+                    <li><a href="#programs"><i class="fa-solid fa-layer-group"></i> Training Programs</a></li>
+                    <li><a href="#notifications"><i class="fa-solid fa-bell"></i> Notifications <span
+                                id="notifBadgeCount"
+                                style="margin-left:auto; background:#C7F000; color:#101D35; font-size:11px; font-weight:700; padding:2px 7px; border-radius:50px;">3</span></a>
+                    </li>
+                    <li><a href="#profile"><i class="fa-solid fa-user-gear"></i> Profile Settings</a></li>
+                    <li><a href="login.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
                 </ul>
             </div>
         </aside>
 
         <!-- Main Area -->
         <div class="dashboard-main-area">
-            <nav class="navbar dashboard-navbar">
-                <div class="container" style="max-width: 100%; padding: 0 32px;">
-                    <div class="mobile-only-brand">
-                        <a href="index.html" class="nav-brand">
-                            <img src="assets/images/kidoo-logo.svg" alt="Kidoo Master Logo" class="nav-brand-img">
-                            <span>Kidoo<span class="brand-accent">Master</span></span>
-                        </a>
-                    </div>
-                    <div class="nav-actions" style="flex-wrap: nowrap; gap: 10px; margin-left: auto;">
-                        <button id="themeToggle" class="action-icon" aria-label="Toggle Dark Mode" title="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
-                        <button id="rtlToggle" class="action-icon" aria-label="Toggle RTL" title="Toggle RTL"><i class="fa-solid fa-arrows-left-right"></i></button>
-                        <div class="user-info-divider" style="display: flex; align-items: center; gap: 8px; border-left: 1px solid var(--border-color); padding-left: 10px;">
-                            <img src="https://ui-avatars.com/api/?name=Sarah+Jenkins&background=8B5E34&color=fff" alt="Parent" style="width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;">
-                            <span class="dashboard-username" style="font-weight: 500; white-space: nowrap;">Sarah Jenkins</span>
-                        </div>
-                        <button class="mobile-menu-toggle action-icon" id="dashboardMenuToggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
-                    </div>
+            <!-- Top Navbar -->
+            <header class="dashboard-navbar">
+                <div class="dashboard-navbar-left">
+                    <button id="dashboardMenuToggle" class="action-icon mobile-menu-toggle"
+                        aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+                    <a href="index.html" class="nav-brand mobile-only-brand">
+                        <img src="assets/images/fca-logo.svg" alt="FCA Logo" class="nav-brand-img"
+                            style="height: 32px;">
+                        <span style="font-size: 16px;">Football <span class="brand-accent">Academy</span></span>
+                    </a>
+                    <span style="font-weight: 700; color: var(--text-primary); font-size: 16px; white-space: nowrap;"
+                        class="hide-on-mobile">Parent Portal</span>
                 </div>
-            </nav>
+                <div class="nav-actions">
+                    <button id="themeToggle" class="action-icon" aria-label="Toggle Dark Mode"
+                        title="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
+                    <button id="rtlToggle" class="action-icon" aria-label="Toggle RTL" title="Toggle RTL"><i
+                            class="fa-solid fa-arrows-left-right"></i></button>
+                    <a href="index.html" class="btn btn-secondary"
+                        style="height: 38px; padding: 0 16px; font-size: 13px;">Main Website</a>
+                </div>
+            </header>
 
-            <!-- Main Content -->
+            <!-- Content Area -->
             <main class="dashboard-content">
-            
-            <!-- 1. Overview -->
-            <section id="overview" class="dashboard-section active" style="padding: 0;">
-                <h2 style="margin-bottom: 32px;">Welcome back, Sarah</h2>
-                <div class="grid-4" style="margin-bottom: 40px;">
-                    <div class="card" style="padding: 24px;">
-                        <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Child Enrolled</h4>
-                        <div style="font-size: 20px; font-weight: 500;">Leo Jenkins (Age 8)</div>
-                        <p style="color: var(--primary-accent); margin-top: 8px;">Pawn to Knight Track</p>
-                    </div>
-                    <div class="card" style="padding: 24px;">
-                        <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Upcoming Session</h4>
-                        <div style="font-size: 20px; font-weight: 500;">Saturday Blitz &amp; Arena</div>
-                        <p style="color: var(--text-secondary); margin-top: 8px;">Tomorrow &bull; 2:00 PM</p>
-                    </div>
-                    <div class="card" style="padding: 24px;">
-                        <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">USCF Rating Growth</h4>
-                        <div style="font-size: 20px; font-weight: 500;">USCF 1,245 (+185)</div>
-                        <p style="color: var(--support-accent); margin-top: 8px;">Scholastic Tier 2 Achieved</p>
-                    </div>
-                    <div class="card" style="padding: 24px; background: #FEF3C7; border-color: #FDE68A;">
-                        <h4 style="color: #D97706; font-size: 14px; margin-bottom: 8px;">Tactical Mastery Alert</h4>
-                        <div style="font-size: 20px; font-weight: 500; color: #D97706;">Knight Forks (92%)</div>
-                        <p style="color: #D97706; margin-top: 8px;">Rook Endgame Drills Next</p>
-                    </div>
+                <div class="demo-notice-bar">
+                    <span><i class="fa-solid fa-circle-info" style="color: #1759C7; margin-right: 8px;"></i><strong>Demo
+                            Preview Mode:</strong> Attendance, match schedules, and enrollments shown below are sample
+                        frontend data stored locally in your browser (not connected to a live academy database).</span>
+                    <button type="button" id="resetDemoBtn" class="btn btn-secondary"
+                        style="height: 34px; padding: 0 14px; font-size: 12px;">Reset Demo Data</button>
                 </div>
 
-                <div class="grid-2" style="gap: 32px;">
-                    <!-- Recent Activity Logs -->
-                    <div class="card" style="padding: 32px;">
-                        <h3 style="margin-bottom: 24px;">Recent Progress Updates</h3>
-                        <div style="display: flex; flex-direction: column; gap: 16px;">
-                            <div class="care-update-row" style="display: flex; gap: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
-                                <div style="width: 48px; height: 48px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-accent); flex-shrink: 0;"><i class="fa-solid fa-trophy"></i></div>
-                                <div>
-                                    <h4 style="font-size: 16px; margin-bottom: 4px;">Scholastic GrandPrix Award</h4>
-                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Leo secured 1st place trophy in U800 division with a 4-0 clean record.</p>
-                                    <span style="font-size: 12px; color: var(--text-secondary);">Today, 10:30 AM</span>
-                                </div>
-                            </div>
-                            <div class="care-update-row" style="display: flex; gap: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
-                                <div style="width: 48px; height: 48px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-accent); flex-shrink: 0;"><i class="fa-solid fa-puzzle-piece"></i></div>
-                                <div>
-                                    <h4 style="font-size: 16px; margin-bottom: 4px;">Tactical Puzzle Streak</h4>
-                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Solved 15 consecutive double-attack puzzle challenges cleanly.</p>
-                                    <span style="font-size: 12px; color: var(--text-secondary);">Today, 9:00 AM</span>
-                                </div>
-                            </div>
-                            <div class="care-update-row" style="display: flex; gap: 16px;">
-                                <div style="width: 48px; height: 48px; background: var(--secondary-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary-accent); flex-shrink: 0;"><i class="fa-solid fa-chess-pawn"></i></div>
-                                <div>
-                                    <h4 style="font-size: 16px; margin-bottom: 4px;">Grandmaster Review Note</h4>
-                                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">GM Alexander Petrov assigned new Opposition Endgame drills for this week.</p>
-                                    <span style="font-size: 12px; color: var(--text-secondary);">Yesterday, 8:00 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#logs" style="display: inline-block; margin-top: 24px; color: var(--primary-accent); font-weight: 500; text-decoration: none;">View all match records</a>
-                    </div>
-                    
-                    <!-- Quick Actions & Team -->
-                    <div style="display: flex; flex-direction: column; gap: 32px;">
-                        <div class="card" style="padding: 32px;">
-                            <h3 style="margin-bottom: 24px;">Assigned Master Coaches</h3>
-                            <div class="care-team-row" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 16px;">
-                                <div class="care-team-info" style="display: flex; align-items: center; gap: 16px;">
-                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-                                    <div>
-                                        <h4 style="font-size: 16px; margin-bottom: 4px;">Alex Petrov, FIDE GM</h4>
-                                        <p style="color: var(--text-secondary); font-size: 14px;">Head Scholastic Coach</p>
-                                    </div>
-                                </div>
-                                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; height: auto;">Message</button>
-                            </div>
-                            <div class="care-team-row" style="display: flex; align-items: center; justify-content: space-between;">
-                                <div class="care-team-info" style="display: flex; align-items: center; gap: 16px;">
-                                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="WIM Sofia" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-                                    <div>
-                                        <h4 style="font-size: 16px; margin-bottom: 4px;">Sofia Martinez, WIM</h4>
-                                        <p style="color: var(--text-secondary); font-size: 14px;">Strategy Games Coach</p>
-                                    </div>
-                                </div>
-                                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; height: auto;">Message</button>
-                            </div>
-                        </div>
-
-                        <div class="card" style="padding: 32px; background: var(--primary-accent); color: white; border: none;">
-                            <h3 style="margin-bottom: 16px; color: white;">Register for Upcoming Cups?</h3>
-                            <p style="margin-bottom: 24px; font-size: 14px; color: rgba(255,255,255,0.9);">Enroll Leo in the next USCF Scholastic GrandPrix tournament session.</p>
-                            <a href="#schedule" class="btn" style="background: white; color: var(--primary-accent); font-weight: 500; padding: 12px 24px; border-radius: 8px; border: none; text-decoration: none; display: inline-block;">Register Child Now</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 2. Session & Tournament Booking -->
-            <section id="schedule" class="dashboard-section" style="padding: 0;">
-                <!-- Booking Portal Hero Header -->
-                <div class="booking-portal-hero">
-                    <div class="booking-hero-left">
-                        <span class="booking-portal-badge"><i class="fa-solid fa-chess-king"></i> Tournament &amp; Masterclass Hub</span>
-                        <h2 style="margin: 0 0 6px 0; font-size: 24px;">Tournament &amp; Session Booking Portal</h2>
-                        <p style="color: var(--text-secondary); margin: 0; font-size: 14px; max-width: 620px;">Register Leo for USCF state qualifiers, blitz sprint cups, or reserve custom 1-on-1 Grandmaster coaching.</p>
-                        
-                        <div class="booking-stats-strip">
-                            <div class="b-stat-item">
-                                <span class="b-stat-label">USCF Member ID</span>
-                                <span class="b-stat-val">#189420-A</span>
-                            </div>
-                            <div class="b-stat-divider"></div>
-                            <div class="b-stat-item">
-                                <span class="b-stat-label">Blitz Rating</span>
-                                <span class="b-stat-val">1140 <small style="color: #10b981; font-weight: 700;">+45</small></span>
-                            </div>
-                            <div class="b-stat-divider"></div>
-                            <div class="b-stat-item">
-                                <span class="b-stat-label">Active Pass</span>
-                                <span class="b-stat-val">3 Events </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="booking-category-pills">
-                        <button type="button" class="booking-category-pill active"><i class="fa-solid fa-layer-group"></i> All Events</button>
-                        <button type="button" class="booking-category-pill"><i class="fa-solid fa-trophy"></i> USCF Rated</button>
-                        <button type="button" class="booking-category-pill"><i class="fa-solid fa-bolt"></i> Blitz Cups</button>
-                        <button type="button" class="booking-category-pill"><i class="fa-solid fa-dice-d6"></i> Arena Meets</button>
-                    </div>
-                </div>
-
-                <!-- Featured Upcoming Tournaments Grid -->
-                <div class="tournament-browse-grid">
-                    <!-- Card 1 -->
-                    <div class="tournament-card-v2">
-                        <div class="t-card-header">
-                            <span class="t-type-tag tag-blitz"><i class="fa-solid fa-bolt"></i> Friendly Blitz</span>
-                            <span class="t-status-tag">18/24 Enrolled</span>
-                        </div>
-                        <h3 class="t-card-title">Weekend Novice Blitz Cup</h3>
-                        <div class="t-capacity-bar" title="75% capacity"><div class="t-capacity-fill" style="width: 75%;"></div></div>
-                        
-                        <div class="t-card-meta-list">
-                            <div class="t-meta-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>Sunday, Jun 28</strong> &bull; 2:00 PM</span></div>
-                            <div class="t-meta-row"><i class="fa-solid fa-user-gear"></i> <span>Director: WIM Sofia Martinez</span></div>
-                            <div class="t-meta-row"><i class="fa-solid fa-location-dot"></i> <span>Strategy Arena Hall A</span></div>
-                        </div>
-
-                        <div class="t-card-footer">
-                            <div class="t-price-box">
-                                <span class="t-price-amount">$25</span>
-                                <span class="t-price-sub">/ entry</span>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-sm" style="padding: 8px 16px; font-size: 13px; height: auto;">Book Event</button>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 (USCF Featured) -->
-                    <div class="tournament-card-v2 featured-uscf">
-                        <div class="t-card-header">
-                            <span class="t-type-tag tag-uscf"><i class="fa-solid fa-crown"></i> USCF Rated</span>
-                            <span class="t-status-tag tag-hot">Filling Fast</span>
-                        </div>
-                        <h3 class="t-card-title">USCF Scholastic GrandPrix Cup</h3>
-                        <div class="t-capacity-bar" title="88% capacity"><div class="t-capacity-fill fill-hot" style="width: 88%;"></div></div>
-                        
-                        <div class="t-card-meta-list">
-                            <div class="t-meta-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>Saturday, Jul 11</strong> &bull; 10:00 AM</span></div>
-                            <div class="t-meta-row"><i class="fa-solid fa-user-gear"></i> <span>Director: GM Alexander Petrov</span></div>
-                            <div class="t-meta-row"><i class="fa-solid fa-layer-group"></i> <span>Sections: U800 &amp; U1200</span></div>
-                        </div>
-
-                        <div class="t-card-footer">
-                            <div class="t-price-box">
-                                <span class="t-price-amount">$35</span>
-                                <span class="t-price-sub">/ entry</span>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-sm" style="padding: 8px 16px; font-size: 13px; height: auto;">Book Event</button>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="tournament-card-v2">
-                        <div class="t-card-header">
-                            <span class="t-type-tag tag-arena"><i class="fa-solid fa-dice"></i> Multi-Game Arena</span>
-                            <span class="t-status-tag">12/20 Enrolled</span>
-                        </div>
-                        <h3 class="t-card-title">Strategy Board Game Triathlon</h3>
-                        <div class="t-capacity-bar" title="60% capacity"><div class="t-capacity-fill" style="width: 60%;"></div></div>
-                        
-                        <div class="t-card-meta-list">
-                            <div class="t-meta-row"><i class="fa-solid fa-calendar-days"></i> <span><strong>Saturday, Jul 18</strong> &bull; 1:00 PM</span></div>
-                            <div class="t-meta-row"><i class="fa-solid fa-user-gear"></i> <span>Director: CM Marcus Vance</span></div>
-                            <div class="t-meta-row"><i class="fa-solid fa-gamepad"></i> <span>Catan Jr, Blokus &amp; Rapid</span></div>
-                        </div>
-
-                        <div class="t-card-footer">
-                            <div class="t-price-box">
-                                <span class="t-price-amount">$20</span>
-                                <span class="t-price-sub">/ entry</span>
-                            </div>
-                            <button type="button" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 13px; height: auto;">Book Event</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Custom Interactive Booking Form & Approved Sessions -->
-                <div class="grid-2 tab-stack" style="gap: 28px;">
-                    <!-- Booking Form Card -->
-                    
-
-                    <!-- Active Tickets & Entry Passes -->
-                    
-                </div>
-            </section>
-
-            <!-- 3. Match & Puzzle Logs -->
-            <section id="logs" class="dashboard-section" style="padding: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
-                    <h2 style="margin: 0;">Child's Match &amp; Tactic Logs</h2>
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                        <input type="month" class="form-control" value="2026-06" style="width: auto; height: 40px; min-width: 160px;">
-                        <button class="btn btn-secondary" style="height: 40px; padding: 0 16px; display: flex; align-items: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>Export Report</button>
-                    </div>
-                </div>
-                <div class="card" style="padding: 0; overflow: hidden;">
-                    <div class="table-responsive">
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <thead style="background: var(--secondary-bg); border-bottom: 1px solid var(--border-color);">
-                                <tr>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Date &amp; Event</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Coach</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Score / Performance</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Grandmaster Coach Rationales</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid var(--border-color);">
-                                    <td style="padding: 16px;"><div style="font-weight: 500;">Today</div><div style="color: var(--text-secondary); font-size: 13px;">10:30 AM</div></td>
-                                    <td style="padding: 16px;">Alex Petrov, FIDE GM</td>
-                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">4-0 Clean Win</span></td>
-                                    <td style="padding: 16px; color: var(--text-secondary); font-size: 14px; max-width: 300px;">Flawless knight fork calculations. Re-study rook vs pawn opposition rules for next week.</td>
-                                    <td style="padding: 16px;"><span style="color: var(--primary-accent); font-weight: 500;">1st Place Trophy</span></td>
-                                </tr>
-                                <tr style="border-bottom: 1px solid var(--border-color);">
-                                    <td style="padding: 16px;"><div style="font-weight: 500;">Yesterday</div><div style="color: var(--text-secondary); font-size: 13px;">4:00 PM</div></td>
-                                    <td style="padding: 16px;">Sofia Martinez, WIM</td>
-                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">Tactic Score: 92%</span></td>
-                                    <td style="padding: 16px; color: var(--text-secondary); font-size: 14px; max-width: 300px;">Double attack puzzles executed accurately. Great spatial vision in Catan Jr resource game.</td>
-                                    <td style="padding: 16px;"><span style="color: var(--support-accent); font-weight: 500;">Passed</span></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 16px;"><div style="font-weight: 500;">Jun 14, 2026</div><div style="color: var(--text-secondary); font-size: 13px;">8:00 AM</div></td>
-                                    <td style="padding: 16px;">Alex Petrov, FIDE GM</td>
-                                    <td style="padding: 16px;"><span style="background: rgba(212, 163, 115, 0.15); color: #D4A373; padding: 4px 8px; border-radius: 4px; font-size: 13px;">Score: 68%</span></td>
-                                    <td style="padding: 16px; color: var(--text-secondary); font-size: 14px; max-width: 300px;">Weak results in Sicilian Defense opening lines. Practice pawn structure protection drills.</td>
-                                    <td style="padding: 16px;"><span style="color: #D4A373; font-weight: 500;">Drill Assigned</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 4. Assigned Master Coaches -->
-            <section id="coaches" class="dashboard-section" style="padding: 0;">
-                <h2 style="margin-bottom: 32px;">Assigned Master Coaches</h2>
-                <div class="grid-3">
-                    <div class="card" style="text-align: center; padding: 32px; display: flex; flex-direction: column; height: 100%;">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" alt="GM Petrov" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover;">
-                        <h3 style="margin-bottom: 4px;">Alex Petrov, FIDE GM</h3>
-                        <span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; display: inline-block; margin-bottom: 16px;">Head Scholastic Coach</span>
-                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Specializes in USCF tournament strategy and endgame calculation depth. 15 years youth coaching experience.</p>
-                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: auto;">
-                            <button class="btn btn-primary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Message</button>
-                            <button class="btn btn-secondary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Schedule</button>
-                        </div>
-                    </div>
-                    <div class="card" style="text-align: center; padding: 32px; display: flex; flex-direction: column; height: 100%;">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="WIM Sofia" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover;">
-                        <h3 style="margin-bottom: 4px;">Sofia Martinez, WIM</h3>
-                        <span style="background: rgba(176, 125, 72, 0.1); color: var(--support-accent); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; display: inline-block; margin-bottom: 16px;">Strategy Games Instructor</span>
-                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Focuses on beginner tactical patterns, spatial board games (Catan Jr, Blokus), and rapid blitz drills.</p>
-                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: auto;">
-                            <button class="btn btn-primary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Message</button>
-                            <button class="btn btn-secondary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Schedule</button>
-                        </div>
-                    </div>
-                    <div class="card" style="text-align: center; padding: 32px; display: flex; flex-direction: column; height: 100%;">
-                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" alt="CM Marcus" style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px; object-fit: cover;">
-                        <h3 style="margin-bottom: 4px;">Marcus Vance, CM</h3>
-                        <span style="background: rgba(245, 158, 11, 0.1); color: var(--highlight-accent); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 500; display: inline-block; margin-bottom: 16px;">Tournament Director</span>
-                        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Directs USCF rated tournaments and updates child rating growth algorithms in the Parent Dashboard.</p>
-                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: auto;">
-                            <button class="btn btn-primary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Message</button>
-                            <button class="btn btn-secondary" style="flex: 1; padding: 8px 0; font-size: 14px; height: auto;">Review</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 5. Messages -->
-            <section id="messages" class="dashboard-section" style="padding: 0;">
-                <div class="chat-wrapper">
-                    <h2 style="margin-bottom: 24px; flex-shrink: 0;">Coach Messages</h2>
-                    <div class="card chat-container" style="padding: 0; display: flex; overflow: hidden;">
-                    <!-- Chat Sidebar -->
-                    <div class="chat-sidebar" style="border-right: 1px solid var(--border-color); display: flex; flex-direction: column; background: var(--card-bg);">
-                        <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
-                            <input type="text" class="form-control" placeholder="Search coach messages...">
-                        </div>
-                        <div style="flex-grow: 1; overflow-y: auto;">
-                            <!-- Active Chat -->
-                            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); background: rgba(139, 94, 52, 0.05); cursor: pointer; display: flex; gap: 12px; border-left: 3px solid var(--primary-accent);">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
-                                <div style="flex-grow: 1; min-width: 0;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                                        <h4 style="font-size: 15px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Alex Petrov, FIDE GM</h4>
-                                        <span style="font-size: 12px; color: var(--text-secondary);">10:42 AM</span>
-                                    </div>
-                                    <p style="margin: 0; font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">GrandPrix tournament registration is confirmed for Leo!</p>
-                                </div>
-                            </div>
-                            <!-- Chat 2 -->
-                            <div style="padding: 16px 20px; border-bottom: 1px solid var(--border-color); cursor: pointer; display: flex; gap: 12px; border-left: 3px solid transparent; transition: background 0.2s;">
-                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=100&q=80" alt="WIM Sofia" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
-                                <div style="flex-grow: 1; min-width: 0;">
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                                        <h4 style="font-size: 15px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Sofia Martinez, WIM</h4>
-                                        <span style="font-size: 12px; color: var(--text-secondary);">Yesterday</span>
-                                    </div>
-                                    <p style="margin: 0; font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Leo played brilliantly in Catan Jr strategy today!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Chat Area -->
-                    <div style="flex-grow: 1; display: flex; flex-direction: column; background: var(--primary-bg);">
-                        <!-- Chat Header -->
-                        <div style="padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; background: var(--card-bg);">
-                            <div style="display: flex; align-items: center; gap: 12px;">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-                                <div>
-                                    <h3 style="font-size: 16px; margin: 0;">Alex Petrov, FIDE GM</h3>
-                                    <span style="font-size: 13px; color: var(--support-accent);">Online</span>
-                                </div>
-                            </div>
-                            <button class="btn btn-secondary" style="padding: 8px 16px; height: auto;">View Coach Profile</button>
-                        </div>
-                        <!-- Chat Messages -->
-                        <div style="flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px;">
-                            <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 16px;">
-                                <span style="font-size: 12px; color: var(--text-secondary); background: var(--card-bg); padding: 4px 12px; border-radius: 50px; border: 1px solid var(--border-color);">Today</span>
-                            </div>
-                            <!-- Received -->
-                            <div style="display: flex; gap: 12px; max-width: 80%;">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 32px; height: 32px; border-radius: 50%; margin-top: auto; object-fit: cover;">
-                                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 16px; border-bottom-left-radius: 4px; border: 1px solid var(--border-color);">
-                                    <p style="margin: 0; font-size: 14px;">Good morning Sarah! Leo's USCF GrandPrix registration is confirmed for next Saturday. Make sure he reviews knight fork patterns beforehand.</p>
-                                    <span style="font-size: 11px; color: var(--text-secondary); margin-top: 6px; display: block;">10:05 AM</span>
-                                </div>
-                            </div>
-                            <!-- Sent -->
-                            <div style="display: flex; gap: 12px; max-width: 80%; align-self: flex-end; flex-direction: row-reverse;">
-                                <div style="background: var(--primary-accent); color: white; padding: 12px 16px; border-radius: 16px; border-bottom-right-radius: 4px;">
-                                    <p style="margin: 0; font-size: 14px;">Hi Alex, thank you so much! He was practicing tactics puzzles for 30 minutes this morning.</p>
-                                    <span style="font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 6px; display: block; text-align: right;">10:30 AM</span>
-                                </div>
-                            </div>
-                            <!-- Received -->
-                            <div style="display: flex; gap: 12px; max-width: 80%;">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80" alt="GM Petrov" style="width: 32px; height: 32px; border-radius: 50%; margin-top: auto; object-fit: cover;">
-                                <div style="background: var(--card-bg); padding: 12px 16px; border-radius: 16px; border-bottom-left-radius: 4px; border: 1px solid var(--border-color);">
-                                    <p style="margin: 0; font-size: 14px;">Excellent! He is demonstrating great focus and sportsmanship.</p>
-                                    <span style="font-size: 11px; color: var(--text-secondary); margin-top: 6px; display: block;">10:42 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Chat Input -->
-                        <div class="chat-input-bar">
-                            <button class="chat-attach-btn" aria-label="Attach file"><i class="fa-solid fa-paperclip"></i></button>
-                            <input type="text" class="chat-input-field" placeholder="Type your message to coach...">
-                            <button class="chat-send-btn">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                                <span>Send</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </section>
-
-            <!-- 6. Subscriptions & Payments -->
-            <section id="billing" class="dashboard-section" style="padding: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
-                    <h2 style="margin: 0;">Membership &amp; Payments</h2>
-                    <button class="btn btn-primary" style="height: 40px; padding: 0 16px;">Change Club Plan</button>
-                </div>
-                <div class="grid-2" style="gap: 32px; margin-bottom: 32px;">
-                    <div class="card" style="padding: 24px; display: flex; align-items: center; justify-content: space-between;">
+                <!-- 1. OVERVIEW SECTION -->
+                <section id="overview" class="dashboard-section active">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
                         <div>
-                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Active Membership</h4>
-                            <div style="font-size: 32px; font-weight: 500; color: var(--primary-accent);">$89.00 / mo</div>
-                            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Champion Club Plan</p>
+                            <h2>Welcome back, <span id="overviewParentName">Sarah Jenkins</span></h2>
+                            <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">Here is a summary of
+                                your children's football training, attendance, and upcoming match fixtures.</p>
                         </div>
-                        <div style="width: 56px; height: 56px; background: rgba(139, 94, 52, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary-accent);"><i class="fa-solid fa-credit-card"></i></div>
+                        <a href="#enrollments" onclick="switchDashboardTab('enrollments')" class="btn btn-primary"
+                            style="height: 44px; padding: 0 22px; font-size: 14px;"><i class="fa-solid fa-plus"
+                                style="margin-right: 8px;"></i> New Enrollment</a>
                     </div>
-                    <div class="card" style="padding: 24px; display: flex; align-items: center; justify-content: space-between;">
+
+                    <!-- KPI Cards -->
+                    <div class="grid-4" style="gap: 20px; margin-bottom: 28px;">
+                        <div class="card" style="padding: 24px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Total
+                                    Enrolled Children</span>
+                                <span
+                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(23, 89, 199, 0.12); color: #1759C7; display: flex; align-items: center; justify-content: center;"><i
+                                        class="fa-solid fa-children"></i></span>
+                            </div>
+                            <div id="kpiChildrenCount"
+                                style="font-size: 32px; font-weight: 700; color: var(--text-primary);">2</div>
+                            <div style="font-size: 12.5px; color: #18864B; font-weight: 600; margin-top: 4px;">Active
+                                Academy Players</div>
+                        </div>
+
+                        <div class="card" style="padding: 24px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span
+                                    style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Attendance
+                                    Percentage</span>
+                                <span
+                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(24, 134, 75, 0.14); color: #18864B; display: flex; align-items: center; justify-content: center;"><i
+                                        class="fa-solid fa-calendar-check"></i></span>
+                            </div>
+                            <div id="kpiAttendancePct"
+                                style="font-size: 32px; font-weight: 700; color: var(--text-primary);">92%</div>
+                            <div style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">11 Present /
+                                1 Absent (This Month)</div>
+                        </div>
+
+                        <div class="card" style="padding: 24px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Upcoming
+                                    Matches</span>
+                                <span
+                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(199, 240, 0, 0.35); color: #101D35; display: flex; align-items: center; justify-content: center;"><i
+                                        class="fa-solid fa-futbol"></i></span>
+                            </div>
+                            <div id="kpiUpcomingMatches"
+                                style="font-size: 32px; font-weight: 700; color: var(--text-primary);">3</div>
+                            <div style="font-size: 12.5px; color: #1759C7; font-weight: 600; margin-top: 4px;">Next: Sat
+                                9:30 AM &bull; Pitch 2</div>
+                        </div>
+
+                        <div class="card" style="padding: 24px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Active
+                                    Programs</span>
+                                <span
+                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(16, 29, 53, 0.1); color: var(--primary-accent); display: flex; align-items: center; justify-content: center;"><i
+                                        class="fa-solid fa-layer-group"></i></span>
+                            </div>
+                            <div id="kpiActivePrograms"
+                                style="font-size: 32px; font-weight: 700; color: var(--text-primary);">2</div>
+                            <div style="font-size: 12.5px; color: var(--text-secondary); margin-top: 4px;">Junior
+                                Footballers &amp; Youth Dev</div>
+                        </div>
+                    </div>
+
+                    <!-- Overview Split: Recent Updates & Next Matches -->
+                    <div class="grid-2" style="gap: 24px;">
+                        <div class="card" style="padding: 28px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                                <h3 style="margin: 0;">Recent Academy Updates</h3>
+                                <a href="#notifications" onclick="switchDashboardTab('notifications')"
+                                    style="font-size: 13px; font-weight: 600; color: var(--secondary-accent); text-decoration: none;">View
+                                    All</a>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 14px;" id="overviewUpdatesList">
+                                <div class="care-update-row"
+                                    style="display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--secondary-bg); border-radius: 12px;">
+                                    <div
+                                        style="width: 36px; height: 36px; border-radius: 10px; background: #C7F000; color: #101D35; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <i class="fa-solid fa-bullhorn"></i></div>
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">
+                                            Saturday Matchday Kit Reminder</div>
+                                        <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+                                            Please arrive 30 minutes before kick-off with shin guards and academy
+                                            jersey.</div>
+                                    </div>
+                                </div>
+                                <div class="care-update-row"
+                                    style="display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--secondary-bg); border-radius: 12px;">
+                                    <div
+                                        style="width: 36px; height: 36px; border-radius: 10px; background: rgba(24, 134, 75, 0.16); color: #18864B; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <i class="fa-solid fa-check"></i></div>
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">
+                                            Attendance Logged for Leo Jenkins</div>
+                                        <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+                                            Marked Present for Tuesday Technical Passing &amp; Ball Mastery session.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="care-update-row"
+                                    style="display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--secondary-bg); border-radius: 12px;">
+                                    <div
+                                        style="width: 36px; height: 36px; border-radius: 10px; background: rgba(23, 89, 199, 0.14); color: #1759C7; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <i class="fa-solid fa-trophy"></i></div>
+                                    <div>
+                                        <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">
+                                            Regional Youth Cup Schedule Released</div>
+                                        <div style="font-size: 13px; color: var(--text-secondary); margin-top: 2px;">
+                                            Check the Match Schedule tab for updated U11 and U9 pitch assignments.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding: 28px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                                <h3 style="margin: 0;">Next Scheduled Matches</h3>
+                                <a href="#matches" onclick="switchDashboardTab('matches')"
+                                    style="font-size: 13px; font-weight: 600; color: var(--secondary-accent); text-decoration: none;">Full
+                                    Schedule</a>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 14px;" id="overviewMatchesList">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. MY CHILDREN SECTION -->
+                <section id="children" class="dashboard-section">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
                         <div>
-                            <h4 style="color: var(--text-secondary); font-size: 14px; margin-bottom: 8px;">Next Auto-Renewal</h4>
-                            <div style="font-size: 20px; font-weight: 500;">Jul 01, 2026</div>
-                            <p style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">Auto-pay via Visa (•••• 4242)</p>
+                            <h2>My Children</h2>
+                            <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">View each child's age
+                                group, assigned football program, training batch, and enrollment status.</p>
                         </div>
-                        <div style="width: 56px; height: 56px; background: rgba(176, 125, 72, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--support-accent);"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        <a href="#enrollments" onclick="switchDashboardTab('enrollments')" class="btn btn-primary"
+                            style="height: 44px; padding: 0 20px; font-size: 14px;">Enroll Another Child</a>
                     </div>
-                </div>
-                <div class="card" style="padding: 0; overflow: hidden;">
-                    <div class="table-responsive">
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <thead style="background: var(--secondary-bg); border-bottom: 1px solid var(--border-color);">
-                                <tr>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Invoice ID</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Billing Period</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Amount</th>
-                                    <th style="padding: 16px; text-align: left; font-weight: 500;">Status</th>
-                                    <th style="padding: 16px; text-align: right; font-weight: 500;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid var(--border-color);">
-                                    <td style="padding: 16px; font-weight: 500;">#INV-2026-06</td>
-                                    <td style="padding: 16px; color: var(--text-secondary);">Jun 01 - Jun 30, 2026</td>
-                                    <td style="padding: 16px; font-weight: 500;">$89.00</td>
-                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">Paid</span></td>
-                                    <td style="padding: 16px; text-align: right;"><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px; height: auto;">Download Receipt</button></td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 16px; font-weight: 500;">#INV-2026-05</td>
-                                    <td style="padding: 16px; color: var(--text-secondary);">May 01 - May 31, 2026</td>
-                                    <td style="padding: 16px; font-weight: 500;">$89.00</td>
-                                    <td style="padding: 16px;"><span style="background: rgba(139, 94, 52, 0.1); color: var(--primary-accent); padding: 4px 8px; border-radius: 4px; font-size: 13px;">Paid</span></td>
-                                    <td style="padding: 16px; text-align: right;"><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px; height: auto;">Download Receipt</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+                    <div class="grid-2" style="gap: 24px;" id="childrenCardsContainer"></div>
+                </section>
 
-            <!-- 7. USCF Rating Analytics & Reports -->
-            <section id="reports" class="dashboard-section" style="padding: 0;">
-                <h2 style="margin-bottom: 32px;">Child Progress &amp; USCF Rating Analytics</h2>
-                <div class="grid-3">
-                    <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
-                        <div style="width: 48px; height: 48px; background: rgba(139, 94, 52, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary-accent); margin-bottom: 16px;"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3 style="margin-bottom: 8px;">USCF Rating Growth Chart</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px; flex-grow: 1;">30-day view of USCF rating progression, win/loss ratio, and tournament performance stats.</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 12px; color: var(--text-secondary);">Current: USCF 1,245</span>
-                            <button class="btn btn-primary" style="padding: 6px 16px; font-size: 13px; height: auto;">View Analytics</button>
-                        </div>
+                <!-- 3. ENROLLMENTS SECTION -->
+                <section id="enrollments" class="dashboard-section">
+                    <div style="margin-bottom: 24px;">
+                        <h2>Enrollment Management</h2>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">Select an age-based
+                            football program, submit a new enrollment request, and track current enrollment statuses.
+                        </p>
                     </div>
-                    <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
-                        <div style="width: 48px; height: 48px; background: rgba(176, 125, 72, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--support-accent); margin-bottom: 16px;"><i class="fa-solid fa-puzzle-piece"></i></div>
-                        <h3 style="margin-bottom: 8px;">Tactical Category Accuracy</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px; flex-grow: 1;">Breakdown of accuracy across forks, pins, skewer tactics, and rook endgames.</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 12px; color: var(--text-secondary);">Last updated today</span>
-                            <button class="btn btn-primary" style="padding: 6px 16px; font-size: 13px; height: auto;">View Analytics</button>
-                        </div>
-                    </div>
-                    <div class="card" style="padding: 24px; display: flex; flex-direction: column;">
-                        <div style="width: 48px; height: 48px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--highlight-accent); margin-bottom: 16px;"><i class="fa-solid fa-medal"></i></div>
-                        <h3 style="margin-bottom: 8px;">Curriculum Adherence</h3>
-                        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px; flex-grow: 1;">Percentage of recommended opening worksheets and tactic exercises completed.</p>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 12px; color: var(--text-secondary);">94% Completed</span>
-                            <button class="btn btn-primary" style="padding: 6px 16px; font-size: 13px; height: auto;">View Analytics</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- 8. Settings -->
-            <section id="settings" class="dashboard-section" style="padding: 0;">
-                <h2 style="margin-bottom: 32px;">Parent &amp; Account Settings</h2>
-                <div class="grid-2" style="gap: 32px;">
-                    <div class="card" style="padding: 32px;">
-                        <h3 style="margin-bottom: 24px;">Parent &amp; Child Profile Information</h3>
-                        <form>
-                            <div class="grid-2">
+                    <div class="grid-2" style="gap: 24px; align-items: start;">
+                        <!-- Submit Enrollment Form -->
+                        <div class="card" style="padding: 28px;">
+                            <h3 style="margin-bottom: 18px;">Submit Enrollment Request</h3>
+                            <form id="enrollmentForm">
                                 <div class="form-group">
-                                    <label>Parent First Name</label>
-                                    <input type="text" class="form-control" value="Sarah">
+                                    <label for="enrollChildName">Child Name</label>
+                                    <input type="text" id="enrollChildName" class="form-control"
+                                        placeholder="e.g. Noah Jenkins" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Parent Last Name</label>
-                                    <input type="text" class="form-control" value="Jenkins">
+                                    <label for="enrollChildAge">Child Age (4–18)</label>
+                                    <input type="number" id="enrollChildAge" class="form-control" min="4" max="18"
+                                        placeholder="e.g. 6" required>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Child's Full Name</label>
-                                <input type="text" class="form-control" value="Leo Jenkins">
-                            </div>
-                            <div class="form-group">
-                                <label>Parent Email Address</label>
-                                <input type="email" class="form-control" value="sarah.jenkins@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <input type="tel" class="form-control" value="+1 (555) 123-4567">
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
-                        </form>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; gap: 32px;">
-                        <div class="card" style="padding: 32px;">
-                            <h3 style="margin-bottom: 24px;">Notification Preferences</h3>
-                            <form>
                                 <div class="form-group">
-                                    <label>Weekly Progress Summaries</label>
-                                    <select class="form-control">
-                                        <option>Daily Rating Reports</option>
-                                        <option selected>Weekly Progress Summaries</option>
-                                        <option>Tournament Cup Alerts Only</option>
+                                    <label for="enrollProgramSelect">Select Age-Based Program</label>
+                                    <select id="enrollProgramSelect" class="form-control" required>
+                                        <option value="Little Strikers (Ages 4–6)">Little Strikers – Ages 4–6</option>
+                                        <option value="Junior Footballers (Ages 7–9)">Junior Footballers – Ages 7–9
+                                        </option>
+                                        <option value="Youth Development (Ages 10–12)">Youth Development – Ages 10–12
+                                        </option>
+                                        <option value="Advanced Academy (Ages 13–15)">Advanced Academy – Ages 13–15
+                                        </option>
+                                        <option value="Elite Performance (Ages 16–18)">Elite Performance – Ages 16–18
+                                        </option>
+                                        <option value="Goalkeeper Specialist (Ages 8–18)">Goalkeeper Specialist – Ages
+                                            8–18</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Language</label>
-                                    <select class="form-control">
-                                        <option selected>English</option>
-                                        <option>Spanish</option>
-                                        <option>French</option>
+                                    <label for="enrollBatchSelect">Preferred Training Batch</label>
+                                    <select id="enrollBatchSelect" class="form-control" required>
+                                        <option value="Tue & Thu • 4:30 PM">Tue &amp; Thu &bull; 4:30 PM</option>
+                                        <option value="Mon & Wed • 5:30 PM">Mon &amp; Wed &bull; 5:30 PM</option>
+                                        <option value="Sat Morning • 9:00 AM">Sat Morning &bull; 9:00 AM</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-secondary mt-3">Save Preferences</button>
+                                <button type="submit" class="btn btn-primary" style="width: 100%; height: 48px;">Submit
+                                    Enrollment Request</button>
+                                <div id="enrollFeedback"
+                                    style="display: none; margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: rgba(24, 134, 75, 0.12); color: #18864B; font-size: 13.5px; font-weight: 600;">
+                                </div>
                             </form>
                         </div>
-                        <div class="card" style="padding: 32px; border-color: rgba(239, 68, 68, 0.3);">
-                            <h3 style="margin-bottom: 16px; color: #EF4444;">Danger Zone</h3>
-                            <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;">If you cancel your membership, child USCF rating history and puzzle badges will be archived.</p>
-                            <button class="btn" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2);">Cancel Membership</button>
+
+                        <!-- Enrollment Status Table -->
+                        <div class="card" style="padding: 28px;">
+                            <h3 style="margin-bottom: 18px;">Current Enrollment Requests</h3>
+                            <div class="table-wrap">
+                                <table class="fca-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Child</th>
+                                            <th>Program</th>
+                                            <th>Batch</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="enrollmentsTableBody"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-        </main>
-    </div>
+                <!-- 4. ATTENDANCE TRACKING SECTION -->
+                <section id="attendance" class="dashboard-section">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+                        <div>
+                            <h2>Attendance Tracking</h2>
+                            <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">Monitor present days,
+                                absent days, attendance percentage, and monthly training calendar.</p>
+                        </div>
+                        <div class="filter-bar" style="margin-bottom: 0;">
+                            <select id="attChildFilter" class="form-control">
+                                <option value="all">All Children</option>
+                                <option value="Leo Jenkins">Leo Jenkins (U9)</option>
+                                <option value="Maya Jenkins">Maya Jenkins (U11)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Summary Cards -->
+                    <div class="grid-3" style="gap: 20px; margin-bottom: 24px;">
+                        <div class="card" style="padding: 22px;">
+                            <div style="font-size: 13px; color: var(--text-secondary); font-weight: 600;">Present Days
+                            </div>
+                            <div id="attPresentCount"
+                                style="font-size: 28px; font-weight: 700; color: #18864B; margin-top: 6px;">11 Days
+                            </div>
+                        </div>
+                        <div class="card" style="padding: 22px;">
+                            <div style="font-size: 13px; color: var(--text-secondary); font-weight: 600;">Absent Days
+                            </div>
+                            <div id="attAbsentCount"
+                                style="font-size: 28px; font-weight: 700; color: #DC2626; margin-top: 6px;">1 Day</div>
+                        </div>
+                        <div class="card" style="padding: 22px;">
+                            <div style="font-size: 13px; color: var(--text-secondary); font-weight: 600;">Attendance
+                                Rate</div>
+                            <div id="attRateValue"
+                                style="font-size: 28px; font-weight: 700; color: #1759C7; margin-top: 6px;">92%</div>
+                        </div>
+                    </div>
+
+                    <div class="grid-2" style="gap: 24px; align-items: start;">
+                        <!-- Attendance Calendar -->
+                        <div class="card" style="padding: 28px;">
+                            <div
+                                style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                                <h3 style="margin: 0;">November 2026 Calendar</h3>
+                                <div style="display: flex; gap: 12px; font-size: 12px; font-weight: 600;">
+                                    <span style="color: #18864B;"><i class="fa-solid fa-square"></i> Present</span>
+                                    <span style="color: #DC2626;"><i class="fa-solid fa-square"></i> Absent</span>
+                                    <span style="color: #101D35;"><i class="fa-solid fa-square"
+                                            style="color:#C7F000;"></i> Upcoming</span>
+                                </div>
+                            </div>
+                            <div class="att-calendar-grid" id="attendanceCalendarGrid"></div>
+                        </div>
+
+                        <!-- Monthly Attendance History -->
+                        <div class="card" style="padding: 28px;">
+                            <h3 style="margin-bottom: 16px;">Monthly Attendance History</h3>
+                            <div class="table-wrap">
+                                <table class="fca-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Player</th>
+                                            <th>Session</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="attendanceHistoryBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. MATCH SCHEDULE SECTION -->
+                <section id="matches" class="dashboard-section">
+                    <div style="margin-bottom: 24px;">
+                        <h2>Match Schedule</h2>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">View upcoming academy
+                            fixtures, kick-off times, pitch venues, opponents, and match statuses.</p>
+                    </div>
+
+                    <div class="card" style="padding: 28px;">
+                        <div class="filter-bar">
+                            <input type="text" id="matchSearchInput" class="form-control"
+                                placeholder="Search opponent or venue...">
+                            <select id="matchStatusFilter" class="form-control">
+                                <option value="all">All Statuses</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="table-wrap">
+                            <table class="fca-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Squad</th>
+                                        <th>Opponent</th>
+                                        <th>Venue</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="matchScheduleBody"></tbody>
+                            </table>
+                        </div>
+                        <div id="matchEmptyState" class="empty-state-box" style="display: none; margin-top: 16px;">
+                            <i class="fa-solid fa-futbol"
+                                style="font-size: 28px; margin-bottom: 10px; color: var(--secondary-accent);"></i>
+                            <div style="font-weight: 600; color: var(--text-primary);">No matches found</div>
+                            <p style="margin: 4px 0 0; font-size: 13.5px;">Try clearing your search or status filter.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. TRAINING PROGRAMS SECTION -->
+                <section id="programs" class="dashboard-section">
+                    <div style="margin-bottom: 24px;">
+                        <h2>Available Training Programs</h2>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">Browse age-based football
+                            coaching tracks and enroll directly from your dashboard.</p>
+                    </div>
+                    <div class="grid-3" style="gap: 20px;">
+                        <div class="card" style="padding: 24px;">
+                            <span class="status-badge status-confirmed" style="margin-bottom: 12px;">Ages 4–6</span>
+                            <h3 style="margin-bottom: 8px;">Little Strikers</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">Balance,
+                                coordination, dribbling basics &amp; 3v3 fun games (1x/week).</p>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; height: 42px; font-size: 13.5px;"
+                                onclick="quickEnrollProgram('Little Strikers (Ages 4–6)')">Select Program</button>
+                        </div>
+                        <div class="card" style="padding: 24px;">
+                            <span class="status-badge status-pending" style="margin-bottom: 12px;">Ages 7–9</span>
+                            <h3 style="margin-bottom: 8px;">Junior Footballers</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">First touch,
+                                passing accuracy, 1v1 turns &amp; 7v7 matchplay (2x/week).</p>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; height: 42px; font-size: 13.5px;"
+                                onclick="quickEnrollProgram('Junior Footballers (Ages 7–9)')">Select Program</button>
+                        </div>
+                        <div class="card" style="padding: 24px;">
+                            <span class="status-badge status-confirmed" style="margin-bottom: 12px;">Ages 10–12</span>
+                            <h3 style="margin-bottom: 8px;">Youth Development</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">Positional
+                                awareness, combinations &amp; 9v9 tactical football (2–3x/week).</p>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; height: 42px; font-size: 13.5px;"
+                                onclick="quickEnrollProgram('Youth Development (Ages 10–12)')">Select Program</button>
+                        </div>
+                        <div class="card" style="padding: 24px;">
+                            <span class="status-badge status-pending" style="margin-bottom: 12px;">Ages 13–15</span>
+                            <h3 style="margin-bottom: 8px;">Advanced Academy</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">11v11
+                                tactical formations, sprint mechanics &amp; league matches (3x/week).</p>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; height: 42px; font-size: 13.5px;"
+                                onclick="quickEnrollProgram('Advanced Academy (Ages 13–15)')">Select Program</button>
+                        </div>
+                        <div class="card" style="padding: 24px;">
+                            <span class="status-badge status-confirmed" style="margin-bottom: 12px;">Ages 16–18</span>
+                            <h3 style="margin-bottom: 8px;">Elite Performance</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+                                High-intensity 11v11 systems, conditioning &amp; showcase cups (4x/week).</p>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; height: 42px; font-size: 13.5px;"
+                                onclick="quickEnrollProgram('Elite Performance (Ages 16–18)')">Select Program</button>
+                        </div>
+                        <div class="card" style="padding: 24px;">
+                            <span class="status-badge status-pending" style="margin-bottom: 12px;">Ages 8–18</span>
+                            <h3 style="margin-bottom: 8px;">Goalkeeper Specialist</h3>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+                                Shot-stopping, diving technique, positioning &amp; distribution (1–2x/week).</p>
+                            <button type="button" class="btn btn-primary"
+                                style="width: 100%; height: 42px; font-size: 13.5px;"
+                                onclick="quickEnrollProgram('Goalkeeper Specialist (Ages 8–18)')">Select
+                                Program</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. NOTIFICATIONS SECTION -->
+                <section id="notifications" class="dashboard-section">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+                        <div>
+                            <h2>Notifications</h2>
+                            <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">Academy
+                                announcements, weather updates, and matchday reminders.</p>
+                        </div>
+                        <button type="button" id="markAllReadBtn" class="btn btn-secondary"
+                            style="height: 40px; padding: 0 18px; font-size: 13px;">Mark All as Read</button>
+                    </div>
+                    <div class="card" style="padding: 24px;">
+                        <div id="notificationsList" style="display: flex; flex-direction: column; gap: 14px;"></div>
+                    </div>
+                </section>
+
+                <!-- 8. PROFILE SETTINGS SECTION -->
+                <section id="profile" class="dashboard-section">
+                    <div style="margin-bottom: 24px;">
+                        <h2>Profile Settings</h2>
+                        <p style="color: var(--text-secondary); margin: 0; font-size: 14.5px;">Update parent contact
+                            details and emergency information for pitchside safety.</p>
+                    </div>
+                    <div class="card" style="padding: 32px; max-width: 680px;">
+                        <form id="profileSettingsForm">
+                            <div class="grid-2" style="gap: 20px;">
+                                <div class="form-group">
+                                    <label for="profileName">Parent Full Name</label>
+                                    <input type="text" id="profileName" class="form-control" value="Sarah Jenkins"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileEmail">Email Address</label>
+                                    <input type="email" id="profileEmail" class="form-control"
+                                        value="sarah.jenkins@example.com" required>
+                                </div>
+                            </div>
+                            <div class="grid-2" style="gap: 20px;">
+                                <div class="form-group">
+                                    <label for="profilePhone">Phone Number</label>
+                                    <input type="tel" id="profilePhone" class="form-control" value="+1 (555) 234-5678"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileEmergency">Emergency Contact</label>
+                                    <input type="text" id="profileEmergency" class="form-control"
+                                        value="David Jenkins • +1 (555) 876-5432" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="height: 48px; padding: 0 28px;">Save
+                                Profile Changes</button>
+                            <div id="profileSaveFeedback"
+                                style="display: none; margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: rgba(24, 134, 75, 0.12); color: #18864B; font-size: 13.5px; font-weight: 600;">
+                                <i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i> Profile settings
+                                saved locally for this demo session.
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </main>
+        </div>
     </div>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/dashboard.js"></script>
 </body>
+
 </html>

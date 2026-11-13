@@ -1,36 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --primary-bg: #FDFBF7;
-    --secondary-bg: #F5EBE1;
-    --section-alt-bg: #EDE0D4;
+    --primary-bg: #F5F7FA;
+    --secondary-bg: #EBF0F7;
+    --section-alt-bg: #E2E9F3;
     /* Soft warm oak wood tint for alternating sections */
-    --section-accent-bg: #E6D2B5;
+    --section-accent-bg: #D5E1F0;
     /* Light wooden square color for contrast sections */
-    --section-warm-bg: #FAF0E6;
+    --section-warm-bg: #F0F4FA;
     /* Soft creamy ivory for subtle sections */
     --card-bg: #FFFFFF;
-    --primary-accent: #8B5E34;
+    --primary-accent: #101D35;
     /* Rich Walnut / Wooden Chess Piece Primary Accent */
-    --secondary-accent: #5C3D2E;
+    --secondary-accent: #1759C7;
     /* Deep Mahogany / Dark Pawn wood */
-    --support-accent: #B07D48;
+    --support-accent: #18864B;
     /* Warm Chestnut */
-    --highlight-accent: #D4A373;
+    --highlight-accent: #C7F000;
     /* Warm Amber Gold Wood */
-    --text-primary: #2C1810;
+    --text-primary: #172033;
     /* Deep Ebony Wood Text */
-    --text-secondary: #6B4D3B;
+    --text-secondary: #667085;
     /* Warm Mocha Slate */
-    --border-color: #E6D2B5;
+    --border-color: #DCE3EE;
 
+    --font-heading: 'Oswald', sans-serif;
     --font-primary: 'Inter', sans-serif;
+    --dark-section-bg: #0B1426;
 
     --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     --border-radius: 20px;
     --container-max-width: 1280px;
-    --shadow: 0 4px 24px -4px rgba(139, 94, 52, 0.1), 0 2px 8px -2px rgba(139, 94, 52, 0.05);
-    --shadow-hover: 0 20px 40px -8px rgba(139, 94, 52, 0.2), 0 12px 16px -6px rgba(139, 94, 52, 0.1);
+    --shadow: 0 4px 24px -4px rgba(23, 89, 199, 0.1), 0 2px 8px -2px rgba(23, 89, 199, 0.05);
+    --shadow-hover: 0 20px 40px -8px rgba(23, 89, 199, 0.2), 0 12px 16px -6px rgba(23, 89, 199, 0.1);
 }
 
 * {
@@ -62,6 +64,8 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -167,7 +171,7 @@ small {
     justify-content: center;
     padding: 0 32px;
     font-family: var(--font-primary);
-    font-weight: 500;
+    font-weight: 700;
     font-size: 16px;
     border-radius: 50px;
     text-decoration: none;
@@ -180,26 +184,29 @@ small {
 }
 
 .btn-primary {
-    background-color: var(--primary-accent);
-    color: #FFFFFF;
+    background-color: #C7F000;
+    color: #101D35;
+    font-weight: 700;
 }
 
 .btn-primary:hover {
-    background-color: #6B4D3B;
+    background-color: #B4DA00;
+    color: #101D35;
     transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 12px 28px rgba(139, 94, 52, 0.35);
+    box-shadow: 0 12px 28px rgba(199, 240, 0, 0.35);
 }
 
 .btn-secondary {
     background-color: transparent;
-    color: var(--primary-accent);
-    border: 2px solid var(--primary-accent);
+    color: #1759C7;
+    border: 2px solid #1759C7;
+    font-weight: 700;
 }
 
 .btn-secondary:hover {
-    background: var(--primary-accent) !important;
+    background: #1759C7 !important;
     color: #FFFFFF !important;
-    border-color: var(--primary-accent) !important;
+    border-color: #1759C7 !important;
 }
 
 .btn-accent {
@@ -208,9 +215,9 @@ small {
 }
 
 .btn-accent:hover {
-    background-color: #B07D48;
+    background-color: #18864B;
     transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 12px 28px rgba(212, 163, 115, 0.35);
+    box-shadow: 0 12px 28px rgba(199, 240, 0, 0.35);
 }
 
 /* Navbar */
@@ -221,7 +228,7 @@ small {
     width: 100%;
     height: 88px;
     z-index: 1000;
-    background: rgba(253, 251, 247, 0.95);
+    background: rgba(245, 247, 250, 0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
@@ -248,7 +255,7 @@ small {
 
 .nav-brand:hover .nav-brand-icon {
     transform: translateY(-2px) scale(1.05);
-    filter: drop-shadow(0 8px 18px rgba(139, 94, 52, 0.35));
+    filter: drop-shadow(0 8px 18px rgba(23, 89, 199, 0.35));
 }
 
 .nav-brand-icon {
@@ -270,7 +277,7 @@ small {
 
 .nav-brand:hover .nav-brand-img {
     transform: translateY(-2px) scale(1.05);
-    filter: drop-shadow(0 6px 16px rgba(139, 94, 52, 0.3));
+    filter: drop-shadow(0 6px 16px rgba(23, 89, 199, 0.3));
 }
 
 .nav-brand-icon svg {
@@ -336,14 +343,14 @@ small {
 
 .nav-links a:hover {
     color: var(--primary-accent);
-    background: rgba(139, 94, 52, 0.08);
+    background: rgba(23, 89, 199, 0.08);
 }
 
 .nav-links a.active {
-    color: var(--primary-accent) !important;
+    color: #101D35 !important;
     font-weight: 700 !important;
-    background: rgba(139, 94, 52, 0.12) !important;
-    box-shadow: inset 0 0 0 1.5px var(--primary-accent);
+    background: #C7F000 !important;
+    box-shadow: 0 4px 12px rgba(199, 240, 0, 0.35);
 }
 
 .nav-actions {
@@ -753,7 +760,7 @@ img {
 .form-control:focus {
     outline: none;
     border-color: var(--primary-accent);
-    box-shadow: 0 0 0 4px rgba(139, 94, 52, 0.15);
+    box-shadow: 0 0 0 4px rgba(23, 89, 199, 0.15);
 }
 
 textarea.form-control {
@@ -794,7 +801,7 @@ select.form-control {
     left: -10%;
     width: 70%;
     height: 70%;
-    background: radial-gradient(circle, rgba(212, 163, 115, 0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(199, 240, 0, 0.18) 0%, transparent 70%);
     z-index: 0;
     pointer-events: none;
 }
@@ -861,8 +868,8 @@ select.form-control {
     align-items: center;
     gap: 8px;
     padding: 8px 16px;
-    background: rgba(139, 94, 52, 0.08);
-    border: 1px solid rgba(139, 94, 52, 0.2);
+    background: rgba(23, 89, 199, 0.08);
+    border: 1px solid rgba(23, 89, 199, 0.2);
     border-radius: 50px;
     color: var(--primary-accent);
     font-size: 14px;
@@ -901,7 +908,7 @@ select.form-control {
 
 .text-highlight {
     color: transparent;
-    background: linear-gradient(120deg, var(--primary-accent), var(--support-accent));
+    background: linear-gradient(120deg, #101D35, #1759C7);
     -webkit-background-clip: text;
     background-clip: text;
     display: inline-block;
@@ -956,7 +963,7 @@ select.form-control {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(139, 94, 52, 0.10);
+    background: rgba(23, 89, 199, 0.10);
     color: var(--primary-accent);
     font-size: 15px;
     flex-shrink: 0;
@@ -972,7 +979,7 @@ select.form-control {
     }
     .hero-has-bg .hero-highlight-icon {
         background: rgba(255, 255, 255, 0.12);
-        color: #F3D5A5;
+        color: #C7F000;
     }
 }
 
@@ -1006,8 +1013,8 @@ select.form-control {
     flex-direction: column;
     gap: 6px;
     padding: 16px 20px;
-    background: rgba(139, 94, 52, 0.07);
-    border: 1px solid rgba(139, 94, 52, 0.18);
+    background: rgba(23, 89, 199, 0.07);
+    border: 1px solid rgba(23, 89, 199, 0.18);
     border-radius: 14px;
     min-width: 120px;
     flex: 1;
@@ -1017,7 +1024,7 @@ select.form-control {
 }
 
 .hero-stage-card:hover {
-    background: rgba(139, 94, 52, 0.14);
+    background: rgba(23, 89, 199, 0.14);
     transform: translateY(-2px);
 }
 
@@ -1049,7 +1056,7 @@ select.form-control {
         background: rgba(255, 255, 255, 0.15);
     }
     .hero-has-bg .stage-tag {
-        color: #F3D5A5;
+        color: #C7F000;
     }
     .hero-has-bg .stage-title {
         color: rgba(255, 255, 255, 0.90);
@@ -1207,7 +1214,7 @@ select.form-control {
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    background: rgba(139, 94, 52, 0.1);
+    background: rgba(23, 89, 199, 0.1);
     color: var(--primary-accent);
     display: flex;
     align-items: center;
@@ -1705,7 +1712,7 @@ th {
     background-color: var(--primary-accent);
     color: white;
     transform: translateY(-5px);
-    box-shadow: 0 15px 25px rgba(139, 94, 52, 0.3);
+    box-shadow: 0 15px 25px rgba(23, 89, 199, 0.3);
 }
 
 .service-card-content {
@@ -1901,7 +1908,7 @@ th {
     }
 
     .hero-has-bg .text-highlight {
-        background: linear-gradient(120deg, var(--primary-accent), var(--support-accent)) !important;
+        background: linear-gradient(120deg, #101D35, #1759C7) !important;
         -webkit-background-clip: text !important;
         background-clip: text !important;
         color: transparent !important;
@@ -1913,8 +1920,8 @@ th {
     }
 
     .hero-has-bg .badge-premium {
-        background: rgba(139, 94, 52, 0.08) !important;
-        border-color: rgba(139, 94, 52, 0.20) !important;
+        background: rgba(23, 89, 199, 0.08) !important;
+        border-color: rgba(23, 89, 199, 0.20) !important;
         color: var(--primary-accent) !important;
     }
 
@@ -1929,7 +1936,7 @@ th {
     }
 
     .hero-has-bg .hero-highlight-icon {
-        background: rgba(139, 94, 52, 0.10) !important;
+        background: rgba(23, 89, 199, 0.10) !important;
         color: var(--primary-accent) !important;
     }
 
@@ -1946,8 +1953,8 @@ th {
     }
 
     .hero-has-bg .hero-stage-card {
-        background: rgba(139, 94, 52, 0.07) !important;
-        border-color: rgba(139, 94, 52, 0.18) !important;
+        background: rgba(23, 89, 199, 0.07) !important;
+        border-color: rgba(23, 89, 199, 0.18) !important;
     }
 
     .hero-has-bg .hero-stage-cards {
@@ -2007,7 +2014,7 @@ th {
 
     /* highlighted span — warm amber wood on dark bg */
     .hero-has-bg .text-highlight {
-        background: linear-gradient(120deg, #F3D5A5, #D4A373);
+        background: linear-gradient(120deg, #C7F000, #E8FF75);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -2234,7 +2241,7 @@ th {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-accent) #F5EBE1;
+    scrollbar-color: var(--primary-accent) #EBF0F7;
 }
 
 /* Custom Scrollbar for Package Comparison on small viewports */
@@ -2243,7 +2250,7 @@ th {
 }
 
 .table-responsive::-webkit-scrollbar-track {
-    background: #F5EBE1 !important;
+    background: #EBF0F7 !important;
     border-radius: 6px !important;
     border: 1px solid var(--border-color) !important;
 }
@@ -2251,7 +2258,7 @@ th {
 .table-responsive::-webkit-scrollbar-thumb {
     background: var(--primary-accent) !important;
     border-radius: 6px !important;
-    border: 2px solid #F5EBE1 !important;
+    border: 2px solid #EBF0F7 !important;
 }
 
 .table-responsive::-webkit-scrollbar-thumb:hover {
@@ -2381,7 +2388,7 @@ th {
 }
 
 .page-hero .text-highlight {
-    background: linear-gradient(120deg, #F3D5A5, #D4A373) !important;
+    background: linear-gradient(120deg, #C7F000, #E8FF75) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
     color: transparent !important;
@@ -2429,9 +2436,9 @@ th {
 .page-hero-stat-icon {
     width: 26px;
     height: 26px;
-    background: rgba(212, 163, 115, 0.22);
-    border: 1px solid rgba(212, 163, 115, 0.45);
-    color: #D4A373;
+    background: rgba(199, 240, 0, 0.22);
+    border: 1px solid rgba(199, 240, 0, 0.45);
+    color: #C7F000;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2729,7 +2736,7 @@ th {
     position: relative;
     overflow: hidden;
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 10px 30px -10px rgba(139, 94, 52, 0.08);
+    box-shadow: 0 10px 30px -10px rgba(23, 89, 199, 0.08);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -2749,8 +2756,8 @@ th {
 
 .equipment-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px -12px rgba(139, 94, 52, 0.18);
-    border-color: rgba(139, 94, 52, 0.3);
+    box-shadow: 0 20px 40px -12px rgba(23, 89, 199, 0.18);
+    border-color: rgba(23, 89, 199, 0.3);
 }
 
 .equipment-card:hover::before {
@@ -2768,14 +2775,14 @@ th {
     width: 60px;
     height: 60px;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(139, 94, 52, 0.12) 0%, rgba(212, 163, 115, 0.22) 100%);
+    background: linear-gradient(135deg, rgba(23, 89, 199, 0.12) 0%, rgba(199, 240, 0, 0.22) 100%);
     color: var(--primary-accent);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 26px;
-    border: 1px solid rgba(139, 94, 52, 0.2);
-    box-shadow: 0 4px 12px rgba(139, 94, 52, 0.08);
+    border: 1px solid rgba(23, 89, 199, 0.2);
+    box-shadow: 0 4px 12px rgba(23, 89, 199, 0.08);
 }
 
 .equipment-tag-badge {
@@ -2784,10 +2791,10 @@ th {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--primary-accent);
-    background: rgba(139, 94, 52, 0.08);
+    background: rgba(23, 89, 199, 0.08);
     padding: 6px 14px;
     border-radius: 30px;
-    border: 1px solid rgba(139, 94, 52, 0.15);
+    border: 1px solid rgba(23, 89, 199, 0.15);
 }
 
 .equipment-card-title {
@@ -2821,12 +2828,12 @@ th {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    border: 1px solid rgba(139, 94, 52, 0.15);
+    border: 1px solid rgba(23, 89, 199, 0.15);
     transition: background-color 0.2s ease;
 }
 
 .equipment-card:hover .equipment-spec-pill {
-    background: rgba(139, 94, 52, 0.12);
+    background: rgba(23, 89, 199, 0.12);
 }
 
 /* === Hero Stage Cards & Feature Highlights (home-2.html & index.html) === */
@@ -2890,7 +2897,7 @@ th {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(212, 163, 115, 0.22);
+    background: rgba(199, 240, 0, 0.22);
     color: var(--highlight-accent);
     display: flex;
     align-items: center;
@@ -2971,7 +2978,7 @@ th {
     right: -50px;
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, rgba(139, 94, 52, 0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(23, 89, 199, 0.08) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -2982,7 +2989,7 @@ th {
     font-size: 12px;
     font-weight: 700;
     color: var(--primary-accent);
-    background: rgba(139, 94, 52, 0.1);
+    background: rgba(23, 89, 199, 0.1);
     padding: 5px 14px;
     border-radius: 20px;
     margin-bottom: 12px;
@@ -3051,7 +3058,7 @@ th {
     background: var(--primary-accent);
     color: #FFFFFF;
     border-color: var(--primary-accent);
-    box-shadow: 0 4px 12px rgba(139, 94, 52, 0.25);
+    box-shadow: 0 4px 12px rgba(23, 89, 199, 0.25);
 }
 
 .tournament-browse-grid {
@@ -3104,9 +3111,9 @@ th {
 }
 
 .t-type-tag.tag-blitz {
-    background: rgba(139, 94, 52, 0.1);
+    background: rgba(23, 89, 199, 0.1);
     color: var(--primary-accent);
-    border: 1px solid rgba(139, 94, 52, 0.2);
+    border: 1px solid rgba(23, 89, 199, 0.2);
 }
 
 .t-type-tag.tag-uscf {
@@ -3225,7 +3232,7 @@ th {
     width: 48px;
     height: 48px;
     border-radius: 14px;
-    background: rgba(139, 94, 52, 0.1);
+    background: rgba(23, 89, 199, 0.1);
     color: var(--primary-accent);
     display: flex;
     align-items: center;
@@ -3285,7 +3292,7 @@ th {
     font-size: 12px;
     font-weight: 700;
     color: var(--primary-accent);
-    background: rgba(139, 94, 52, 0.1);
+    background: rgba(23, 89, 199, 0.1);
     padding: 4px 12px;
     border-radius: 20px;
     display: inline-flex;
@@ -3417,7 +3424,7 @@ th {
     font-size: 11.5px;
     font-weight: 600;
     color: var(--primary-accent);
-    background: rgba(139, 94, 52, 0.08);
+    background: rgba(23, 89, 199, 0.08);
     padding: 5px 10px;
     border-radius: 6px;
     text-decoration: none;
@@ -3497,8 +3504,8 @@ th {
    ========================================================= */
 .hero-home2 {
     padding: 130px 0 70px;
-    background: radial-gradient(circle at 10% 15%, rgba(139, 94, 52, 0.08) 0%, transparent 55%), 
-                radial-gradient(circle at 90% 85%, rgba(212, 163, 115, 0.12) 0%, transparent 55%), 
+    background: radial-gradient(circle at 10% 15%, rgba(23, 89, 199, 0.08) 0%, transparent 55%), 
+                radial-gradient(circle at 90% 85%, rgba(199, 240, 0, 0.12) 0%, transparent 55%), 
                 var(--primary-bg);
     border-bottom: 1px solid var(--border-color);
     position: relative;
@@ -3506,9 +3513,9 @@ th {
 }
 
 [data-theme="dark"] .hero-home2 {
-    background: radial-gradient(circle at 10% 15%, rgba(139, 94, 52, 0.22) 0%, transparent 60%), 
+    background: radial-gradient(circle at 10% 15%, rgba(23, 89, 199, 0.22) 0%, transparent 60%), 
                 radial-gradient(circle at 90% 85%, rgba(176, 125, 72, 0.15) 0%, transparent 60%), 
-                #1C130E;
+                #0B1426;
 }
 
 .hero-home2-header {
@@ -3638,7 +3645,7 @@ th {
 
 [data-theme="dark"] .floating-badge-top-left {
     background: rgba(28, 19, 14, 0.92);
-    color: #FDFBF7;
+    color: #F5F7FA;
     border-color: #422D22;
 }
 
@@ -3729,13 +3736,13 @@ th {
     justify-content: center;
     font-size: 16px;
 }
-.chess-cell.light { background: #EDE0D4; color: #2C1810; }
-.chess-cell.dark { background: #8B5E34; color: #FDFBF7; }
-.chess-cell.highlight { background: #D4A373; color: #1C130E; }
+.chess-cell.light { background: #E2E9F3; color: #172033; }
+.chess-cell.dark { background: #101D35; color: #F5F7FA; }
+.chess-cell.highlight { background: #C7F000; color: #0B1426; }
 
 .matrix-next-event {
     margin-top: auto;
-    background: linear-gradient(135deg, rgba(139, 94, 52, 0.08) 0%, rgba(139, 94, 52, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(23, 89, 199, 0.08) 0%, rgba(23, 89, 199, 0.02) 100%);
     border: 1px dashed var(--primary-accent);
     border-radius: 14px;
     padding: 16px;
@@ -3850,7 +3857,7 @@ th {
     font-size: 11px;
     font-weight: 700;
     color: var(--primary-accent);
-    background: rgba(139, 94, 52, 0.1);
+    background: rgba(23, 89, 199, 0.1);
     padding: 4px 10px;
     border-radius: 50px;
     margin-bottom: 12px;
@@ -3954,7 +3961,7 @@ th {
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    background: linear-gradient(120deg, var(--primary-accent), var(--support-accent));
+    background: linear-gradient(120deg, #101D35, #1759C7);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -4010,7 +4017,7 @@ th {
 /* Desktop: glass treatment over the dark photo overlay */
 @media (min-width: 769px) {
     .hero-has-bg .hero-extra-label {
-        color: #F3D5A5;
+        color: #C7F000;
     }
 
     .hero-has-bg .hero-stats-band,
@@ -4028,7 +4035,7 @@ th {
 
     .hero-has-bg .hero-stat strong {
         background: none;
-        color: #F3D5A5;
+        color: #C7F000;
     }
 
     .hero-has-bg .hero-stat span,
@@ -4087,4 +4094,10 @@ th {
     .hero-quote-card p {
         font-size: 14.5px;
     }
+}
+
+/* Dashboard Typography: Inter */
+.dashboard-layout h1, .dashboard-layout h2, .dashboard-layout h3, .dashboard-layout h4, .dashboard-layout h5, .dashboard-layout h6 {
+    font-family: var(--font-primary);
+    letter-spacing: -0.01em;
 }

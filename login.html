@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parent Login | Kidoo Master</title>
-    <meta name="description" content="Parent Login Portal for Kidoo Master Chess & Strategy Games Club. Access child rating progress and session schedules.">
+    <title>Parent Login | Football Coaching Academy</title>
+    <meta name="description" content="Parent Login Portal for Football Coaching Academy. Sign in to view your child's attendance, enrollments, and match schedules.">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -16,25 +16,25 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--primary-bg);
+            background: linear-gradient(135deg, rgba(11, 20, 38, 0.84) 0%, rgba(16, 29, 53, 0.88) 100%), url('assets/images/football-hero-stadium.jpg') center/cover no-repeat fixed;
             padding: 40px 16px;
             position: relative;
         }
         .auth-card {
-            background: var(--primary-bg);
+            background: var(--card-bg);
             padding: 48px;
             border-radius: 24px;
             width: 100%;
             max-width: 480px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 24px 48px rgba(11, 20, 38, 0.45);
             border: 1px solid var(--border-color);
             margin-top: 40px;
         }
         .auth-card h2 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: -0.3px;
+            letter-spacing: 0.01em;
         }
         .remember-forgot-row {
             display: flex;
@@ -43,13 +43,18 @@
             margin-bottom: 24px;
         }
         .auth-link {
-            color: var(--primary-accent);
-            font-weight: 500;
+            color: var(--secondary-accent);
+            font-weight: 600;
             text-decoration: none;
             transition: color 0.2s ease;
         }
         .auth-link:hover {
-            color: var(--highlight-accent);
+            color: var(--support-accent);
+        }
+        .fixed-toggles .action-icon {
+            background: rgba(255, 255, 255, 0.14);
+            color: #FFFFFF;
+            backdrop-filter: blur(8px);
         }
         @media (max-width: 480px) {
             .auth-card {
@@ -57,7 +62,7 @@
                 margin-top: 60px;
             }
             .auth-card h2 {
-                font-size: 21px;
+                font-size: 24px;
             }
             .remember-forgot-row {
                 flex-direction: row;
@@ -84,37 +89,37 @@
         <div class="auth-card fade-up">
             <div class="text-center mb-4">
                 <a href="index.html" class="nav-brand" style="justify-content: center; margin-bottom: 24px;">
-                    <img src="assets/images/kidoo-logo.svg" alt="Kidoo Master Logo" class="nav-brand-img">
-                    <span style="font-size: 20px;">Kidoo<span class="brand-accent">Master</span></span>
+                    <img src="assets/images/fca-logo.svg" alt="Football Coaching Academy Logo" class="nav-brand-img">
+                    <span style="font-size: 20px;">Football <span class="brand-accent">Academy</span></span>
                 </a>
-                <h2>Parent Login</h2>
-                <p class="subheading" style="margin-bottom: 0;">Log in to track your child's USCF rating progress, session schedules, and tournament entries.</p>
+                <h2>Welcome Back, Parents!</h2>
+                <p class="subheading" style="margin-bottom: 0; font-size: 15px;">Sign in to stay connected with your child's football journey.</p>
             </div>
             
-            <form action="dashboard.html">
+            <form action="dashboard.html" id="loginForm">
                 <div class="form-group">
-                    <label>Parent Email Address</label>
-                    <input type="email" class="form-control" placeholder="" required>
+                    <label for="loginEmail">Parent Email</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="parent@example.com" required>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
+                    <label for="passwordInput">Password</label>
                     <div style="position: relative;">
-                        <input type="password" class="form-control" id="passwordInput" placeholder="" required style="padding-right: 48px; width: 100%;">
-                        <button type="button" onclick="var p=document.getElementById('passwordInput'); p.type = (p.type === 'password') ? 'text' : 'password';" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 0; z-index: 10;">
+                        <input type="password" class="form-control" id="passwordInput" placeholder="Enter your password" required style="padding-right: 48px; width: 100%;">
+                        <button type="button" onclick="var p=document.getElementById('passwordInput'); p.type = (p.type === 'password') ? 'text' : 'password';" aria-label="Toggle password visibility" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 0; z-index: 10;">
                             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                         </button>
                     </div>
                 </div>
                 
                 <div class="form-group remember-forgot-row">
-                    <label style="display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 400; cursor: pointer;">
-                        <input type="checkbox" style="width: 16px; height: 16px; accent-color: var(--primary-accent);">
-                        Remember me
+                    <label style="display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 500; cursor: pointer; font-size: 14px;">
+                        <input type="checkbox" style="width: 16px; height: 16px; accent-color: #1759C7;">
+                        Remember Me
                     </label>
-                    <a href="#" class="auth-link" style="font-size: 14px;">Forgot Password?</a>
+                    <a href="contact.html" class="auth-link" style="font-size: 14px;">Forgot Password?</a>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Log In to Parent Dashboard</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Login to Parent Portal</button>
                 
                 <div style="text-align: center; position: relative; margin-bottom: 24px;">
                     <hr style="border-color: var(--border-color); opacity: 0.5;">
@@ -122,7 +127,7 @@
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
-                    <button type="button" class="btn btn-secondary" style="width: 100%; display: flex; gap: 12px; justify-content: center; align-items: center;">
+                    <button type="button" onclick="window.location.href='dashboard.html'" class="btn btn-secondary" style="width: 100%; display: flex; gap: 12px; justify-content: center; align-items: center;">
                         <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
                           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -131,14 +136,14 @@
                         </svg>
                         Continue with Google
                     </button>
-                    <button type="button" class="btn btn-secondary" style="width: 100%; display: flex; gap: 12px; justify-content: center; align-items: center;">
+                    <button type="button" onclick="window.location.href='dashboard.html'" class="btn btn-secondary" style="width: 100%; display: flex; gap: 12px; justify-content: center; align-items: center;">
                         <i class="fa-brands fa-apple" style="font-size: 20px;"></i>
                         Continue with Apple
                     </button>
                 </div>
                 
                 <p class="text-center mt-4" style="color: var(--text-secondary);">
-                    Don't have an account? <a href="register.html" class="auth-link">Enroll Child / Sign Up</a>
+                    New to the academy? <a href="register.html" class="auth-link">Register &amp; Enroll Child</a>
                 </p>
             </form>
         </div>
