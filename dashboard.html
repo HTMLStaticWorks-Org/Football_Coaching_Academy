@@ -45,16 +45,60 @@
             height: 72px !important;
             min-height: 72px !important;
             box-sizing: border-box !important;
-            padding: 0 28px;
+            padding: 0 20px;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 12px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            gap: 10px;
         }
 
         .dashboard-sidebar-brand .nav-brand {
             margin: 0;
             padding: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            flex: 1 1 auto;
+            overflow: hidden;
+        }
+
+        .dashboard-sidebar-brand .nav-brand-img {
+            width: 32px !important;
+            height: 32px !important;
+            flex-shrink: 0;
+        }
+
+        .dashboard-sidebar-brand .nav-brand span {
+            font-size: 17px !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.3px !important;
+            white-space: nowrap !important;
+        }
+
+        .sidebar-close-btn {
+            display: none;
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--secondary-bg);
+            color: var(--text-primary);
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            cursor: pointer;
+            flex-shrink: 0;
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        .sidebar-close-btn:hover {
+            color: var(--primary-accent);
+            border-color: var(--primary-accent);
         }
 
         .dashboard-nav-wrapper {
@@ -238,9 +282,30 @@
         }
 
         /* Table Responsiveness */
+        .dashboard-section .grid-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .dashboard-section .grid-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .dashboard-section .grid-4 {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .dashboard-section .card {
+            min-width: 0;
+            max-width: 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
         .table-wrap {
             width: 100%;
+            max-width: 100%;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .fca-table {
@@ -298,16 +363,36 @@
 
         @media (max-width: 1024px) and (min-width: 769px) {
             .dashboard-sidebar {
-                width: 220px !important;
+                width: 280px !important;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+
+            .dashboard-sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-close-btn,
+            .dashboard-navbar #dashboardMenuToggle {
+                display: inline-flex !important;
+            }
+
+            .mobile-only-brand {
+                display: flex !important;
+            }
+
+            .hide-on-mobile {
+                display: none !important;
             }
 
             .dashboard-main-area {
-                margin-left: 220px !important;
+                margin-left: 0 !important;
             }
 
             .dashboard-navbar {
-                left: 220px !important;
-                width: calc(100% - 220px) !important;
+                left: 0 !important;
+                width: 100% !important;
                 padding: 0 20px !important;
             }
 
@@ -316,24 +401,59 @@
             }
 
             .dashboard-section .grid-4 {
-                grid-template-columns: repeat(2, 1fr) !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
                 gap: 16px !important;
             }
 
             .dashboard-section .grid-3 {
-                grid-template-columns: repeat(2, 1fr) !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
                 gap: 16px !important;
+            }
+
+            #enrollments .grid-2,
+            #attendance .grid-2 {
+                grid-template-columns: minmax(0, 1fr) !important;
+                gap: 20px !important;
             }
 
             .dashboard-nav li a {
                 font-size: 13.5px !important;
                 padding: 12px 20px !important;
             }
+
+            .dashboard-sidebar-brand {
+                padding: 0 16px !important;
+            }
+
+            .dashboard-sidebar-brand .nav-brand span {
+                font-size: 15px !important;
+            }
         }
 
         @media (max-width: 768px) {
             .dashboard-main-area {
                 margin-left: 0;
+            }
+
+            .dashboard-sidebar-brand {
+                padding: 0 18px !important;
+            }
+
+            .dashboard-sidebar-brand .nav-brand {
+                gap: 8px !important;
+            }
+
+            .dashboard-sidebar-brand .nav-brand-img {
+                width: 30px !important;
+                height: 30px !important;
+            }
+
+            .dashboard-sidebar-brand .nav-brand span {
+                font-size: 16px !important;
+            }
+
+            .sidebar-close-btn {
+                display: inline-flex !important;
             }
 
             .mobile-only-brand {
@@ -362,12 +482,23 @@
                 margin-left: auto !important;
             }
 
+            .dashboard-navbar #dashboardMenuToggle,
             .dashboard-navbar #themeToggle,
-            .dashboard-navbar #rtlToggle {
+            .dashboard-navbar #rtlToggle,
+            .dashboard-navbar #profileToggle {
                 display: inline-flex !important;
                 width: 36px !important;
+                min-width: 36px !important;
                 height: 36px !important;
                 font-size: 16px !important;
+                flex-shrink: 0 !important;
+                padding: 0 !important;
+            }
+
+            .dashboard-navbar .mobile-only-brand {
+                gap: 8px !important;
+                min-width: 0 !important;
+                flex-shrink: 1 !important;
             }
 
             .dashboard-navbar .nav-actions .btn {
@@ -377,10 +508,29 @@
                 padding: 0 14px !important;
                 font-size: 12.5px !important;
                 white-space: nowrap !important;
+                flex-shrink: 0 !important;
             }
 
             .dashboard-content {
                 padding: 88px 16px 24px 16px !important;
+            }
+
+            .dashboard-section .grid-2 {
+                grid-template-columns: minmax(0, 1fr) !important;
+                gap: 20px !important;
+            }
+
+            .dashboard-section .card {
+                padding: 20px 16px !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .fca-table th,
+            .fca-table td {
+                padding: 10px 10px !important;
+                font-size: 13px !important;
             }
 
             .filter-bar .form-control {
@@ -391,55 +541,223 @@
 
         @media (max-width: 480px) {
             .dashboard-navbar {
-                padding: 0 12px !important;
-                gap: 8px !important;
-            }
-
-            .dashboard-navbar-left {
-                gap: 8px !important;
-            }
-
-            .mobile-only-brand span {
-                font-size: 14.5px !important;
-            }
-
-            .mobile-only-brand .nav-brand-img {
-                height: 28px !important;
-            }
-
-            .dashboard-navbar #themeToggle,
-            .dashboard-navbar #rtlToggle {
-                width: 32px !important;
-                height: 32px !important;
-                font-size: 14px !important;
-            }
-
-            .dashboard-navbar .nav-actions {
+                padding: 0 10px !important;
                 gap: 6px !important;
             }
 
+            .dashboard-navbar-left {
+                gap: 6px !important;
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+                overflow: hidden !important;
+            }
+
+            .dashboard-navbar .mobile-only-brand {
+                gap: 6px !important;
+                min-width: 0 !important;
+                flex-shrink: 1 !important;
+                overflow: hidden !important;
+            }
+
+            .mobile-only-brand span {
+                font-size: 13px !important;
+                letter-spacing: -0.3px !important;
+            }
+
+            .mobile-only-brand .nav-brand-img {
+                height: 24px !important;
+                width: 24px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .dashboard-navbar #dashboardMenuToggle,
+            .dashboard-navbar #themeToggle,
+            .dashboard-navbar #rtlToggle,
+            .dashboard-navbar #profileToggle {
+                width: 30px !important;
+                min-width: 30px !important;
+                height: 30px !important;
+                font-size: 13px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .dashboard-navbar .nav-actions {
+                gap: 5px !important;
+                flex-shrink: 0 !important;
+            }
+
             .dashboard-navbar .nav-actions .btn {
-                height: 34px !important;
-                padding: 0 10px !important;
-                font-size: 11.5px !important;
+                height: 30px !important;
+                padding: 0 9px !important;
+                font-size: 11px !important;
+                flex-shrink: 0 !important;
             }
 
             .dashboard-section .grid-4 {
-                grid-template-columns: 1fr 1fr !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                grid-auto-rows: 1fr !important;
+                align-items: stretch !important;
                 gap: 12px !important;
             }
 
+            .dashboard-section .grid-4 .card {
+                padding: 16px 14px !important;
+                height: 100% !important;
+            }
+
             .dashboard-section .grid-3 {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: minmax(0, 1fr) !important;
+            }
+
+            .dashboard-section .grid-3>div:last-child:nth-child(odd) {
+                grid-column: auto !important;
+                justify-self: stretch !important;
+                width: 100% !important;
             }
 
             .dashboard-section .grid-2 {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: minmax(0, 1fr) !important;
+                gap: 16px !important;
+            }
+
+            .dashboard-section .card {
+                padding: 18px 14px !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            .fca-table th,
+            .fca-table td {
+                padding: 9px 7px !important;
+                font-size: 12px !important;
+            }
+
+            .att-calendar-grid {
+                gap: 4px !important;
             }
 
             .att-cal-day {
-                min-height: 36px;
-                font-size: 11.5px;
+                min-height: 34px;
+                font-size: 11px;
+            }
+        }
+
+        /* === RTL Mode Alignment for Dashboard === */
+        [dir="rtl"] .dashboard-sidebar {
+            right: 0 !important;
+            left: auto !important;
+            border-right: none !important;
+            border-left: 1px solid var(--border-color) !important;
+        }
+
+        [dir="rtl"] .dashboard-main-area {
+            margin-left: 0 !important;
+            margin-right: 280px !important;
+        }
+
+        [dir="rtl"] .dashboard-navbar {
+            left: 0 !important;
+            right: 280px !important;
+            width: calc(100% - 280px) !important;
+        }
+
+        [dir="rtl"] .dashboard-sidebar-brand .nav-brand,
+        [dir="rtl"] .dashboard-navbar .mobile-only-brand {
+            flex-direction: row !important;
+        }
+
+        [dir="rtl"] .dashboard-sidebar-brand .nav-brand .brand-accent,
+        [dir="rtl"] .dashboard-navbar .mobile-only-brand .brand-accent {
+            margin-left: 0 !important;
+            margin-right: 4px !important;
+        }
+
+        [dir="rtl"] .dashboard-nav li a {
+            flex-direction: row !important;
+            border-left: none !important;
+            border-right: 4px solid transparent !important;
+            text-align: right !important;
+        }
+
+        [dir="rtl"] .dashboard-nav li a:hover,
+        [dir="rtl"] .dashboard-nav li a.active {
+            border-left-color: transparent !important;
+            border-right-color: var(--primary-accent) !important;
+        }
+
+        [dir="rtl"][data-theme="dark"] .dashboard-nav li a:hover,
+        [dir="rtl"][data-theme="dark"] .dashboard-nav li a.active {
+            border-left-color: transparent !important;
+            border-right-color: #C7F000 !important;
+            box-shadow: inset -4px 0 0 #C7F000 !important;
+        }
+
+        [dir="rtl"] #notifBadgeCount {
+            margin-left: 0 !important;
+            margin-right: auto !important;
+        }
+
+        [dir="rtl"] .demo-notice-bar i {
+            margin-right: 0 !important;
+            margin-left: 8px !important;
+        }
+
+        [dir="rtl"] .care-update-row {
+            flex-direction: row !important;
+            text-align: right !important;
+        }
+
+        [dir="rtl"] .fca-table,
+        [dir="rtl"] .fca-table th,
+        [dir="rtl"] .fca-table td {
+            text-align: right !important;
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            [dir="rtl"] .dashboard-sidebar {
+                transform: translateX(100%) !important;
+            }
+
+            [dir="rtl"] .dashboard-sidebar.open {
+                transform: translateX(0) !important;
+            }
+
+            [dir="rtl"] .dashboard-main-area {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            [dir="rtl"] .dashboard-navbar {
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            [dir="rtl"] .dashboard-sidebar {
+                transform: translateX(100%) !important;
+            }
+
+            [dir="rtl"] .dashboard-sidebar.open {
+                transform: translateX(0) !important;
+            }
+
+            [dir="rtl"] .dashboard-main-area {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            [dir="rtl"] .dashboard-navbar {
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+            }
+
+            [dir="rtl"] .dashboard-navbar .nav-actions {
+                margin-left: 0 !important;
+                margin-right: auto !important;
             }
         }
     </style>
@@ -455,6 +773,10 @@
                     <img src="assets/images/fca-logo.svg" alt="Football Coaching Academy Logo" class="nav-brand-img">
                     <span>Football <span class="brand-accent">Academy</span></span>
                 </a>
+                <button type="button" id="dashboardSidebarClose" class="sidebar-close-btn" aria-label="Close Sidebar"
+                    title="Close Menu"
+                    onclick="document.querySelector('.dashboard-sidebar').classList.remove('open')"><i
+                        class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="dashboard-nav-wrapper">
                 <ul class="dashboard-nav">
@@ -494,8 +816,8 @@
                         title="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
                     <button id="rtlToggle" class="action-icon" aria-label="Toggle RTL" title="Toggle RTL"><i
                             class="fa-solid fa-arrows-left-right"></i></button>
-                    <a href="index.html" class="btn btn-secondary"
-                        style="height: 38px; padding: 0 16px; font-size: 13px;">Main Website</a>
+                    <button id="profileToggle" type="button" class="action-icon" onclick="switchDashboardTab('profile')"
+                        aria-label="Profile Settings" title="Profile Settings"><i class="fa-solid fa-user"></i></button>
                 </div>
             </header>
 
@@ -524,14 +846,15 @@
                     </div>
 
                     <!-- KPI Cards -->
-                    <div class="grid-4" style="gap: 20px; margin-bottom: 28px;">
+                    <div class="grid-4" style="gap: 20px; margin-bottom: 28px; align-items: stretch;">
                         <div class="card" style="padding: 24px;">
                             <div
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Total
+                                style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+                                <span
+                                    style="font-size: 13px; font-weight: 600; color: var(--text-secondary); line-height: 1.35;">Total
                                     Enrolled Children</span>
                                 <span
-                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(23, 89, 199, 0.12); color: #1759C7; display: flex; align-items: center; justify-content: center;"><i
+                                    style="width: 36px; height: 36px; min-width: 36px; flex-shrink: 0; border-radius: 10px; background: rgba(23, 89, 199, 0.12); color: #1759C7; display: flex; align-items: center; justify-content: center;"><i
                                         class="fa-solid fa-children"></i></span>
                             </div>
                             <div id="kpiChildrenCount"
@@ -542,12 +865,12 @@
 
                         <div class="card" style="padding: 24px;">
                             <div
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
                                 <span
-                                    style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Attendance
+                                    style="font-size: 13px; font-weight: 600; color: var(--text-secondary); line-height: 1.35;">Attendance
                                     Percentage</span>
                                 <span
-                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(24, 134, 75, 0.14); color: #18864B; display: flex; align-items: center; justify-content: center;"><i
+                                    style="width: 36px; height: 36px; min-width: 36px; flex-shrink: 0; border-radius: 10px; background: rgba(24, 134, 75, 0.14); color: #18864B; display: flex; align-items: center; justify-content: center;"><i
                                         class="fa-solid fa-calendar-check"></i></span>
                             </div>
                             <div id="kpiAttendancePct"
@@ -558,11 +881,12 @@
 
                         <div class="card" style="padding: 24px;">
                             <div
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Upcoming
+                                style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+                                <span
+                                    style="font-size: 13px; font-weight: 600; color: var(--text-secondary); line-height: 1.35;">Upcoming
                                     Matches</span>
                                 <span
-                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(199, 240, 0, 0.35); color: #101D35; display: flex; align-items: center; justify-content: center;"><i
+                                    style="width: 36px; height: 36px; min-width: 36px; flex-shrink: 0; border-radius: 10px; background: rgba(199, 240, 0, 0.35); color: #101D35; display: flex; align-items: center; justify-content: center;"><i
                                         class="fa-solid fa-futbol"></i></span>
                             </div>
                             <div id="kpiUpcomingMatches"
@@ -573,11 +897,12 @@
 
                         <div class="card" style="padding: 24px;">
                             <div
-                                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                <span style="font-size: 13px; font-weight: 600; color: var(--text-secondary);">Active
+                                style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px;">
+                                <span
+                                    style="font-size: 13px; font-weight: 600; color: var(--text-secondary); line-height: 1.35;">Active
                                     Programs</span>
                                 <span
-                                    style="width: 36px; height: 36px; border-radius: 10px; background: rgba(16, 29, 53, 0.1); color: var(--primary-accent); display: flex; align-items: center; justify-content: center;"><i
+                                    style="width: 36px; height: 36px; min-width: 36px; flex-shrink: 0; border-radius: 10px; background: rgba(16, 29, 53, 0.1); color: var(--primary-accent); display: flex; align-items: center; justify-content: center;"><i
                                         class="fa-solid fa-layer-group"></i></span>
                             </div>
                             <div id="kpiActivePrograms"
@@ -602,7 +927,8 @@
                                     style="display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--secondary-bg); border-radius: 12px;">
                                     <div
                                         style="width: 36px; height: 36px; border-radius: 10px; background: #C7F000; color: #101D35; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                        <i class="fa-solid fa-bullhorn"></i></div>
+                                        <i class="fa-solid fa-bullhorn"></i>
+                                    </div>
                                     <div>
                                         <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">
                                             Saturday Matchday Kit Reminder</div>
@@ -615,7 +941,8 @@
                                     style="display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--secondary-bg); border-radius: 12px;">
                                     <div
                                         style="width: 36px; height: 36px; border-radius: 10px; background: rgba(24, 134, 75, 0.16); color: #18864B; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                        <i class="fa-solid fa-check"></i></div>
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
                                     <div>
                                         <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">
                                             Attendance Logged for Leo Jenkins</div>
@@ -628,7 +955,8 @@
                                     style="display: flex; gap: 14px; align-items: flex-start; padding: 14px; background: var(--secondary-bg); border-radius: 12px;">
                                     <div
                                         style="width: 36px; height: 36px; border-radius: 10px; background: rgba(23, 89, 199, 0.14); color: #1759C7; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                        <i class="fa-solid fa-trophy"></i></div>
+                                        <i class="fa-solid fa-trophy"></i>
+                                    </div>
                                     <div>
                                         <div style="font-weight: 600; font-size: 14px; color: var(--text-primary);">
                                             Regional Youth Cup Schedule Released</div>

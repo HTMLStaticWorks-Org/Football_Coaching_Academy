@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parent Registration | Football Coaching Academy</title>
-    <meta name="description" content="Register for the Football Coaching Academy Parent Portal. Enroll your child in age-based football programs and track attendance and match schedules.">
+    <meta name="description"
+        content="Register for the Football Coaching Academy Parent Portal. Enroll your child in age-based football programs and track attendance and match schedules.">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -20,6 +22,7 @@
             padding: 40px 16px;
             position: relative;
         }
+
         .auth-card {
             background: var(--card-bg);
             padding: 48px;
@@ -30,45 +33,104 @@
             border: 1px solid var(--border-color);
             margin-top: 40px;
         }
+
         .auth-card h2 {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
             letter-spacing: 0.01em;
         }
+
         .auth-link {
             color: var(--secondary-accent);
             font-weight: 600;
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+            text-underline-offset: 3px;
         }
+
         .auth-link:hover {
-            color: var(--support-accent);
+            color: #18864B !important;
+            text-decoration: underline !important;
         }
+
+        [data-theme="dark"] .auth-link {
+            color: #60A5FA;
+        }
+
+        [data-theme="dark"] .auth-link:hover {
+            color: #C7F000 !important;
+            text-decoration: underline !important;
+        }
+
+        .pw-toggle-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            z-index: 10;
+            transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .pw-toggle-btn:hover {
+            color: var(--secondary-accent) !important;
+            background-color: rgba(23, 89, 199, 0.12) !important;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        [data-theme="dark"] .pw-toggle-btn:hover {
+            color: #C7F000 !important;
+            background-color: rgba(199, 240, 0, 0.15) !important;
+        }
+
         .fixed-toggles .action-icon {
             background: rgba(255, 255, 255, 0.14);
             color: #FFFFFF;
             backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
         }
+
+        .fixed-toggles .action-icon:hover {
+            background: #C7F000 !important;
+            color: #101D35 !important;
+            border-color: #C7F000 !important;
+            transform: translateY(-2px);
+        }
+
         .form-row-2 {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
         }
+
         @media (max-width: 540px) {
             .form-row-2 {
                 grid-template-columns: 1fr;
                 gap: 0;
             }
         }
+
         @media (max-width: 480px) {
             .auth-card {
                 padding: 32px 20px;
                 margin-top: 60px;
             }
+
             .auth-card h2 {
                 font-size: 23px;
             }
+
             .fixed-toggles {
                 top: 16px !important;
                 right: 16px !important;
@@ -76,12 +138,16 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="auth-page">
-        <div class="fixed-toggles" style="position: absolute; top: 24px; right: 24px; display: flex; gap: 12px; z-index: 1000;">
-            <button id="themeToggle" class="action-icon" aria-label="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button>
-            <button id="rtlToggle" class="action-icon" aria-label="Toggle RTL"><i class="fa-solid fa-arrows-left-right"></i></button>
+        <div class="fixed-toggles"
+            style="position: absolute; top: 24px; right: 24px; display: flex; gap: 12px; z-index: 1000;">
+            <button id="themeToggle" class="action-icon" aria-label="Toggle Dark Mode"><i
+                    class="fa-solid fa-moon"></i></button>
+            <button id="rtlToggle" class="action-icon" aria-label="Toggle RTL"><i
+                    class="fa-solid fa-arrows-left-right"></i></button>
         </div>
         <div class="auth-card fade-up">
             <div class="text-center mb-4">
@@ -90,32 +156,38 @@
                     <span style="font-size: 20px;">Football <span class="brand-accent">Academy</span></span>
                 </a>
                 <h2>Join Football Coaching Academy</h2>
-                <p class="subheading" style="margin-bottom: 0; font-size: 15px;">Create your Parent Portal account to enroll your child, track training attendance, and view match schedules.</p>
+                <p class="subheading" style="margin-bottom: 0; font-size: 15px;">Create your Parent Portal account to
+                    enroll your child, track training attendance, and view match schedules.</p>
             </div>
-            
+
             <form action="dashboard.html" id="registerForm">
                 <div class="form-group">
                     <label for="parentName">Parent Name</label>
-                    <input type="text" id="parentName" class="form-control" placeholder="e.g. Sarah Jenkins" required minlength="2">
+                    <input type="text" id="parentName" class="form-control" placeholder="e.g. Sarah Jenkins" required
+                        minlength="2">
                 </div>
                 <div class="form-row-2">
                     <div class="form-group">
                         <label for="parentEmail">Email Address</label>
-                        <input type="email" id="parentEmail" class="form-control" placeholder="parent@example.com" required>
+                        <input type="email" id="parentEmail" class="form-control" placeholder="parent@example.com"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="parentPhone">Phone Number</label>
-                        <input type="tel" id="parentPhone" class="form-control" placeholder="+1 (555) 234-5678" required pattern="[0-9+\-\s\(\)]{7,20}">
+                        <input type="tel" id="parentPhone" class="form-control" placeholder="+1 (555) 234-5678" required
+                            pattern="[0-9+\-\s\(\)]{7,20}">
                     </div>
                 </div>
                 <div class="form-row-2">
                     <div class="form-group">
                         <label for="childName">Child Name</label>
-                        <input type="text" id="childName" class="form-control" placeholder="e.g. Leo Jenkins" required minlength="2">
+                        <input type="text" id="childName" class="form-control" placeholder="e.g. Leo Jenkins" required
+                            minlength="2">
                     </div>
                     <div class="form-group">
                         <label for="childAge">Child Age</label>
-                        <input type="number" id="childAge" class="form-control" placeholder="4–18" min="4" max="18" required>
+                        <input type="number" id="childAge" class="form-control" placeholder="4–18" min="4" max="18"
+                            required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -133,30 +205,51 @@
                 <div class="form-group" style="position: relative; margin-bottom: 20px;">
                     <label for="passwordInputReg">Password</label>
                     <div style="position: relative;">
-                        <input type="password" class="form-control" id="passwordInputReg" placeholder="Minimum 6 characters" minlength="6" required style="padding-right: 48px; width: 100%;">
-                        <button type="button" onclick="var p=document.getElementById('passwordInputReg'); p.type = (p.type === 'password') ? 'text' : 'password';" aria-label="Toggle password visibility" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 0; z-index: 10;">
-                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <input type="password" class="form-control" id="passwordInputReg"
+                            placeholder="Minimum 6 characters" minlength="6" required
+                            style="padding-right: 48px; width: 100%;">
+                        <button type="button" class="pw-toggle-btn"
+                            onclick="var p=document.getElementById('passwordInputReg'); p.type = (p.type === 'password') ? 'text' : 'password';"
+                            aria-label="Toggle password visibility">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
                         </button>
                     </div>
                 </div>
                 <div class="form-group" style="position: relative; margin-bottom: 20px;">
                     <label for="confirmPasswordReg">Confirm Password</label>
                     <div style="position: relative;">
-                        <input type="password" class="form-control" id="confirmPasswordReg" placeholder="Re-enter password" required style="padding-right: 48px; width: 100%;">
-                        <button type="button" onclick="var p=document.getElementById('confirmPasswordReg'); p.type = (p.type === 'password') ? 'text' : 'password';" aria-label="Toggle confirm password visibility" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; padding: 0; z-index: 10;">
-                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <input type="password" class="form-control" id="confirmPasswordReg"
+                            placeholder="Re-enter password" required style="padding-right: 48px; width: 100%;">
+                        <button type="button" class="pw-toggle-btn"
+                            onclick="var p=document.getElementById('confirmPasswordReg'); p.type = (p.type === 'password') ? 'text' : 'password';"
+                            aria-label="Toggle confirm password visibility">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
                         </button>
                     </div>
-                    <p id="pwMatchError" style="color: #e74c3c; font-size: 13px; margin: 6px 0 0; display: none;">Passwords do not match.</p>
+                    <p id="pwMatchError" style="color: #e74c3c; font-size: 13px; margin: 6px 0 0; display: none;">
+                        Passwords do not match.</p>
                 </div>
                 <div class="form-group" style="margin-bottom: 24px;">
-                    <label style="display: flex; align-items: flex-start; gap: 8px; margin: 0; font-weight: 400; cursor: pointer; font-size: 14px;">
-                        <input type="checkbox" style="width: 16px; height: 16px; accent-color: #1759C7; margin-top: 4px;" required>
-                        <span style="color: var(--text-secondary);">I agree to the <a href="#" class="auth-link">Academy Terms &amp; Code of Conduct</a> and <a href="#" class="auth-link">Privacy Policy</a>.</span>
+                    <label
+                        style="display: flex; align-items: flex-start; gap: 8px; margin: 0; font-weight: 400; cursor: pointer; font-size: 14px;">
+                        <input type="checkbox"
+                            style="width: 16px; height: 16px; accent-color: #1759C7; margin-top: 4px;" required>
+                        <span style="color: var(--text-secondary);">I agree to the <a href="#" class="auth-link">Academy
+                                Terms &amp; Code of Conduct</a> and <a href="#" class="auth-link">Privacy
+                                Policy</a>.</span>
                     </label>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Create Parent Account</button>
-                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Create Parent
+                    Account</button>
+
                 <p class="text-center mt-4" style="color: var(--text-secondary);">
                     Already registered? <a href="login.html" class="auth-link">Parent Login</a>
                 </p>
@@ -198,4 +291,5 @@
         })();
     </script>
 </body>
+
 </html>
